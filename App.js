@@ -25,5 +25,4 @@ const AppNavigator = createStackNavigator({ //declare all the screen possible of
   });
 
 export default createAppContainer(AppNavigator); // create the stack navigator
-
-
+//ceci est un com
