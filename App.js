@@ -25,10 +25,7 @@ const AppNavigator = createStackNavigator({ //declare all the screen possible of
   });
 
 export default createAppContainer(AppNavigator); // create the stack navigator
-<<<<<<< HEAD
 //ceci est un com
 // JE suis sur la branch de dev de Nico
 //Com d'ernest
-=======
-//Ernest Branch 
->>>>>>> 7f6ad6d4168acc6efe94ce7f028d1049c8df6f46
+//coucou
