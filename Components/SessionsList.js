@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, Dimensions, AsyncStorage, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, ScrollView, Text, Dimensions, AsyncStorage, Image, TouchableOpacity, Alert, ImageBackground} from 'react-native';
 import DialogInput from 'react-native-dialog-input';
 
 import PreviewTrain from './PreviewTrain.js'
@@ -23,11 +23,11 @@ export class SessionsList extends React.Component {
     static navigationOptions = {
         title: 'Train Screen',
         headerStyle: {
-            backgroundColor: "#ffffff",
+            backgroundColor: "#E1E3DD",
             textAlign: 'center',
         },
         header: props =>
-            <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, justifyContent: 'space-between' }}>
+            <View style={{  backgroundColor:"#e2e3d8" ,flexDirection: 'row', height: HEADER_HEIGHT, justifyContent: 'space-between' }}>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', textAlignVertical: 'center' }}>Muscu APP</Text>
                 <TouchableOpacity style={{ marginRight: 10 }} onPress={() => self.addSession()}>
                     <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10 }} source={require('../ico/plus_ico.png')} />
@@ -100,20 +100,23 @@ export class SessionsList extends React.Component {
 
     render() {
         return (
-            <ScrollView style={{ backgroundColor: '#e8582c' }}>
-                <DialogInput isDialogVisible={this.state.IsAddSessionVisible}
-                    title={"Ajouter un entraînement"}
-                    message={"Donnez un nom a votre entraînment : "}
-                    hintInput={"Mon entraînement " + this.state.TrainingSessions.length}
-                    submitInput={(inputText) => { this.saveSession(inputText) }}
-                    closeDialog={() => { this.setState({ IsAddSessionVisible: false }) }} />
 
-                <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', paddingTop: 10 }}>
-                    {this.state.TrainingSessions.map(session =>
-                        <PreviewTrain name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'TrainSession', {TrainingSessions: this.state.TrainingSessions, session: { name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
-                    )}
-                </View>
-            </ScrollView>
+            <ImageBackground style={{width: 400, height: 700}}  source={require('../ico/background_bloc_note.jpg')}>
+                <ScrollView>
+                    <DialogInput isDialogVisible={this.state.IsAddSessionVisible}
+                        title={"Ajouter un entraînement"}
+                        message={"Donnez un nom a votre entraînment : "}
+                        hintInput={"Mon entraînement " + this.state.TrainingSessions.length}
+                        submitInput={(inputText) => { this.saveSession(inputText) }}
+                        closeDialog={() => { this.setState({ IsAddSessionVisible: false }) }} />
+
+                    <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', paddingTop: 10 }}>
+                        {this.state.TrainingSessions.map(session =>
+                            <PreviewTrain name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'TrainSession', {TrainingSessions: this.state.TrainingSessions, session: { name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
+                        )}
+                    </View>
+                </ScrollView>
+            </ImageBackground>
         )
     }
 }
