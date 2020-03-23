@@ -29,7 +29,7 @@ export class SessionsList extends React.Component {
             textAlign: 'center',
         },
         header: props =>
-            <Header style={StyleElements.styles.Header}/>
+            <Header style={StyleElements.header}/>
     }
 
     componentDidMount() {
