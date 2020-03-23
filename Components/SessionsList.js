@@ -5,6 +5,8 @@ import DialogInput from 'react-native-dialog-input';
 import PreviewTrain from './PreviewTrain.js'
 import CustomButton from './CustomButton.js';
 import TrainSession from './TrainSession.js';
+import Header from './Header.js'; 
+import StyleElements from './StyleElements.js'; 
 
 const WIDTH = Dimensions.get('window').width - 40;
 const HEADER_HEIGHT = 50;
@@ -27,12 +29,7 @@ export class SessionsList extends React.Component {
             textAlign: 'center',
         },
         header: props =>
-            <View style={{  backgroundColor:"#e2e3d8" ,flexDirection: 'row', height: HEADER_HEIGHT, justifyContent: 'space-between' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', textAlignVertical: 'center' }}>Muscu APP</Text>
-                <TouchableOpacity style={{ marginRight: 10 }} onPress={() => self.addSession()}>
-                    <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10 }} source={require('../ico/plus_ico.png')} />
-                </TouchableOpacity>
-            </View>
+            <Header style={StyleElements.styles.Header}/>
     }
 
     componentDidMount() {
@@ -100,9 +97,7 @@ export class SessionsList extends React.Component {
 
     render() {
         return (
-
-            <ImageBackground style={{width: 400, height: 700}}  source={require('../ico/background_bloc_note.jpg')}>
-                <ScrollView>
+                <ScrollView style={{ backgroundColor : '#fff1f1'}}> 
                     <DialogInput isDialogVisible={this.state.IsAddSessionVisible}
                         title={"Ajouter un entraînement"}
                         message={"Donnez un nom a votre entraînment : "}
@@ -116,7 +111,6 @@ export class SessionsList extends React.Component {
                         )}
                     </View>
                 </ScrollView>
-            </ImageBackground>
         )
     }
 }
