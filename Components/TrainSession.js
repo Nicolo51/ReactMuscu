@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image , AsyncStorage} from 'react-native';
 import PreviewSession from './PreviewSession';
+import Header from './Header.js'; 
+import StyleElements from './StyleElements.js';
 
 const HEADER_HEIGHT = 50; 
 
@@ -21,12 +23,7 @@ export class TrainSession extends React.Component {
             textAlign: 'center',
         },
         header: props =>
-            <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, justifyContent: 'space-between' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', textAlignVertical: 'center' }}> { self.props.navigation.state.params.session.name } </Text>
-                <TouchableOpacity style={{ marginRight: 10 }} onPress={() => self.onAddSessionPress()}>
-                    <Image style={{ heiight: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10 }} source={require('../ico/plus_ico.png')} />
-                </TouchableOpacity>
-            </View>
+        <Header style={StyleElements.header}/>
     }
 
     addSession = (name, muscle, numberOfRep, timer, image) => {
@@ -66,7 +63,7 @@ export class TrainSession extends React.Component {
 
     render() {
         return (
-            <View style={{ backgroundColor: '#e8582c', flex: 1 }}>
+            <View style={{  backgroundColor : StyleElements.background.backgroundColor, flex: 1 }}>
                 { this.state.session.Exercices.map( set => 
                     <PreviewSession name={set.key + ": " + set.set} delete={() => this.removeSet(set.key)} />
                     )}

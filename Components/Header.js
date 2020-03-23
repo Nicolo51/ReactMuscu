@@ -9,10 +9,10 @@ export class Header extends React.Component{
 
     render(){
         return ( 
-            <View style={{ backgroundColor: this.props.style.backgroundColor  /*backgroundColor:"#d32f2f"*/ ,flexDirection: 'row', height: HEADER_HEIGHT, justifyContent: 'space-between' }}>
+            <View style={{ backgroundColor: this.props.style.backgroundColor,flexDirection: 'row', height: HEADER_HEIGHT, justifyContent: 'space-between' }}>
                 <Text style={{ color : this.props.style.color ,fontSize: 20, fontWeight: 'bold', textAlignVertical: 'center' }}>Muscu APP</Text>
                 <TouchableOpacity style={{ marginRight: 10 }} onPress={() => this.props.add}>
-                    <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10 }} source={require('../ico/plus_ico.png')} />
+                    <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10 }} source={require('../ico/white_plus_ico.png')} />
                 </TouchableOpacity>
             </View>
         )
