@@ -1,0 +1,17 @@
+Done
+ - Main menu (plus ou moins )
+ - Ajout de session (plus ou moins)
+ - chart de couleur (peu encore changer)
+ - List exercices
+ - sauvegarde des sessions
+ - Profil d'une personne
+
+BackLog
+ - Sauvegarde des exercices
+ - Chargement des exercices lors du lancement de l'appli
+ - refaire fonctionner le bouton du header
+ - Histograme des poids par exercices
+ - State
+ - Timer
+ - Visualisation de l'exercice en cours (petit truc a cocher et tout)
+ - Gestion de l'upload d'image pour illustrer les exos
