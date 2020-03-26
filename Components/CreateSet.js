@@ -108,7 +108,7 @@ export class CreateSet extends React.Component{
                     <Dropdown onChangeText={(value, index, data) => this.changeTextSeconds(value)} label={'Secondes'} value={0} data={[{value:0}, {value:10}, {value:20}, {value:30}, {value:40}, {value:50}]}/>
                 </View>
             </View>
-            <CustomButton onPress={() => this.createSet()}/>
+            <CustomButton text="Ajouter" onPress={() => this.createSet()}/>
         </View>
         )
     }

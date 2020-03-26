@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image , AsyncStorage} from 'react-native';
-import PreviewSession from './PreviewSession';
+import PreviewSet from './PreviewSet';
 
 const HEADER_HEIGHT = 50; 
 
-export class TrainingSessions extends React.Component {
+export class SetsList extends React.Component {
     constructor(props) {
         super(props);
         self = this;
@@ -30,47 +30,42 @@ export class TrainingSessions extends React.Component {
     }
 
     addSession = (name, muscle, numberOfRep, timer, image) => {
-        /*console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
+        console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
         let session = this.state.session;  
-        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, numberOfRep: numberOfRep, time: timer, image: image}); 
+        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image}); 
         this.setState({session: session}); 
-        let TrainingSessions = this.state.TrainingSessions; 
-        TrainingSessions.session
-        TrainingSessions.se*/
+        this.saveChanges(); 
     }
 
-    saveChanges =  async() => {
-        const JSONstring = JSON.stringify(TrainingSessions);
-        await AsyncStorage.setItem('TrainingSessions', JSONstring);
-        console.log(JSONstring + ": as been saved");
+    saveChanges = () => {
+        let TrainingSessions = this.state.TrainingSessions; 
+        let session = this.state.session; 
+        TrainingSessions[session.key] = session; 
+        Save("TrainingSessions", TrainingSessions);
     }
 
     onAddSessionPress = () => {
         navigateToScreen(this, 'CreateSet', { onGoBack: (name, muscle, numberOfRep, timer, image) => this.addSession(name, muscle, numberOfRep, timer, image) }); 
     }
 
-    removeSet = async (key) => {
-        let session = this.state.sesson;
+    deleteSet = (key) => {
+        let session = this.state.session;
+        session.Exercices.splice(key, 1);
         for (let i = 0; i < session.Exercices.length; i++) {
-            if (session.Exercices[i].key == key) {
-                session.Exercices.splice(i, 1);
-                
-                let TrainingSessions = this.state.TrainingSessions; 
-                TrainingSessions[session.key] = session; 
-                this.setState({ session: session, TrainingSessions: TrainingSessions });
-                //Save('TrainingSessions', this.state.TrainingSessions); 
-            }
+            session.Exercices[i].key = i; 
         }
+        this.setState({session: session});
+        this.saveChanges(); 
     }
-
     render() {
         return (
             <View style={{ backgroundColor: '#e8582c', flex: 1 }}>
-                
+                {this.state.session.Exercices.map( set => 
+                    <PreviewSet restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } delete={() => this.deleteSet(set.key) }/>
+                    )}
             </View>
         )
     }
-
 }
 
-export default TrainingSessions
+export default SetsList

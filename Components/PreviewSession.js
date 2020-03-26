@@ -1,12 +1,15 @@
+
 import React from 'react';
 import { AsyncStorage, TouchableOpacity, StyleSheet, View, ScrollView, Image, Text, Dimensions } from 'react-native';
 const HEADER_HEIGHT = 40;
 
-export class PreviewSession extends React.Component {
+
+
+export class PreviewSet extends React.Component {
 
     render() {
         return (
-            <View style={styles.button} >
+            <TouchableOpacity style={[styles.button, { width: this.props.width }]} onPress={this.props.onPress}>
                 <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, backgroundColor: 'white', justifyContent: 'space-between' }}>
                     <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, textAlignVertical: 'center' }}> {this.props.name}</Text>
                     <TouchableOpacity style={{ width: 40 }} onPress={this.props.delete}>
@@ -14,10 +17,8 @@ export class PreviewSession extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, backgroundColor: 'green' }}>
-                    <Text style={{ marginTop: 10, marginLeft: 5 }}>- Nombre d'exos : </Text>
-                    <Text style={{ marginTop: 10, marginLeft: 5 }}>- Temps : </Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -30,4 +31,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PreviewSession; 
+export default PreviewSet; 

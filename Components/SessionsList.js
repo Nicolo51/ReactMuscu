@@ -2,9 +2,9 @@ import React from 'react';
 import { View, ScrollView, Text, Dimensions, AsyncStorage, Image, TouchableOpacity, Alert } from 'react-native';
 import DialogInput from 'react-native-dialog-input';
 
-import PreviewTrain from './PreviewTrain.js'
+import PreviewSession from './PreviewSession.js'
 import CustomButton from './CustomButton.js';
-import TrainingSessions from './TrainingSessions.js';
+import SetsList from './SetsList.js';
 
 const WIDTH = Dimensions.get('window').width - 40;
 const HEADER_HEIGHT = 50;
@@ -94,7 +94,7 @@ export class SessionsList extends React.Component {
 
                 <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', paddingTop: 10 }}>
                     {this.state.TrainingSessions.map(session =>
-                        <PreviewTrain name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'TrainingSessions', {TrainingSessions: this.state.TrainingSessions, session: { name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
+                        <PreviewSession name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'SetsList', { TrainingSessions: this.state.TrainingSessions, session: {key: session.key, name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
                     )}
                 </View>
             </ScrollView>

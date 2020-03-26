@@ -5,7 +5,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import SessionsList from './Components/SessionsList.js';
-import TrainingSessions from './Components/TrainingSessions.js'; 
+import SetsList from './Components/SetsList.js'; 
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { CreateSet } from './Components/CreateSet.js';
@@ -37,7 +37,7 @@ Load = async (name) => {
 
 const AppNavigator = createStackNavigator({ //declare all the screen possible of the stack navigator 
   SessionsList: { screen: SessionsList }, // <Name to call>: { screen: <imported Component from above> } 
-  TrainingSessions: { screen: TrainingSessions }, 
+  SetsList: { screen: SetsList }, 
   CreateSet : { screen: CreateSet }, 
 },
   {
