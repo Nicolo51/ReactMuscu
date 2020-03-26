@@ -5,6 +5,7 @@ Done
  - List exercices
  - sauvegarde des sessions
  - Profil d'une personne
+ - Mise a jour de system de sauvegarde  
 
 BackLog
  - Sauvegarde des exercices (Nicolas)

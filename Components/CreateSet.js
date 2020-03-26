@@ -61,7 +61,6 @@ export class CreateSet extends React.Component{
             } 
             this.setState({numberOfRep: nbr}); 
         }
-
     }
 
     createSet = () => {

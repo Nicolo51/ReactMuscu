@@ -4,7 +4,7 @@ import DialogInput from 'react-native-dialog-input';
 
 import PreviewTrain from './PreviewTrain.js'
 import CustomButton from './CustomButton.js';
-import TrainSession from './TrainSession.js';
+import TrainingSessions from './TrainingSessions.js';
 
 const WIDTH = Dimensions.get('window').width - 40;
 const HEADER_HEIGHT = 50;
@@ -18,6 +18,7 @@ export class SessionsList extends React.Component {
         this.state = {
             TrainingSessions: [],
             IsAddSessionVisible: false,
+            loaded: false,
         };
     }
     static navigationOptions = {
@@ -35,8 +36,14 @@ export class SessionsList extends React.Component {
             </View>
     }
 
-    componentDidMount() {
-        this.loadSavedSessions();
+    async componentDidMount() {
+        if(this.state.loaded === true)
+            return; 
+        let TrainingSessions = await Load('TrainingSessions'); 
+        if(TrainingSessions == undefined){
+            return;
+        }
+        this.setState({TrainingSessions: TrainingSessions, loaded: true});
     }
 
     addSession = () => {
@@ -49,52 +56,29 @@ export class SessionsList extends React.Component {
             {
                 text: "OK", onPress: async () => {
                     try {
-                        const value = await AsyncStorage.getItem('TrainSessions');
-                        if (value !== null) {
-                            let sessions = JSON.parse(value);
-                            sessions.splice(key, 1);
-                            for(let i =0; i < sessions.length ; i++){
-                                sessions[i].key = i;
-                                console.log("Set to " + i );
-                            }
-                            this.setState({ TrainingSessions: sessions });
-                            console.log("Set state perform");
-                            const JSONstring = JSON.stringify(this.state.TrainingSessions);
-                            await AsyncStorage.setItem('TrainSessions', JSONstring);
-                            console.log(JSONstring + ": as been saved");
+                        let TrainingSessions = this.state.TrainingSessions; 
+                        TrainingSessions.splice(key, 1);
+                        for(let i = 0; i < TrainingSessions.length ; i++){
+                            TrainingSessions[i].key = i;
                         }
+                        this.setState({ TrainingSessions: TrainingSessions });
+                        Save("TrainingSessions", TrainingSessions); 
                     } catch (error) {
-                        // Error retrieving datass
+                        console.log("Something went wrong in deleteSession function : " + error); 
                     }
                 }
             }
-
         ]);
     }
 
     saveSession = async (sessionName) => {
         try {
-            let sessions = this.state.TrainingSessions;
-            sessions.push({key: sessions.length, name: sessionName, Exercices: [] });
-            this.setState({ TrainingSessions: sessions, IsAddSessionVisible: false });
-            const JSONstring = JSON.stringify(this.state.TrainingSessions);
-            await AsyncStorage.setItem('TrainSessions', JSONstring);
-            console.log(JSONstring + ": as been saved");
+            let TrainingSessions = this.state.TrainingSessions;
+            TrainingSessions.push({key: TrainingSessions.length, name: sessionName, Exercices: [] });
+            this.setState({ TrainingSessions: TrainingSessions, IsAddSessionVisible: false });
+            Save('TrainingSessions', TrainingSessions); 
         } catch (error) {
-            // Error saving data
-        }
-    }
-
-    loadSavedSessions = async () => {
-        try {
-            const value = await AsyncStorage.getItem('TrainSessions');
-            if (value !== null) {
-                console.log(value); 
-                let sessions = JSON.parse(value);
-                this.setState({ TrainingSessions: sessions,  })
-            }
-        } catch (error) {
-            // Error retrieving datass
+            console.log("Something went wrong saveSession function : " + error );
         }
     }
 
@@ -110,7 +94,7 @@ export class SessionsList extends React.Component {
 
                 <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', paddingTop: 10 }}>
                     {this.state.TrainingSessions.map(session =>
-                        <PreviewTrain name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'TrainSession', {TrainingSessions: this.state.TrainingSessions, session: { name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
+                        <PreviewTrain name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'TrainingSessions', {TrainingSessions: this.state.TrainingSessions, session: { name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
                     )}
                 </View>
             </ScrollView>

@@ -4,7 +4,7 @@ import PreviewSession from './PreviewSession';
 
 const HEADER_HEIGHT = 50; 
 
-export class TrainSession extends React.Component {
+export class TrainingSessions extends React.Component {
     constructor(props) {
         super(props);
         self = this;
@@ -30,18 +30,18 @@ export class TrainSession extends React.Component {
     }
 
     addSession = (name, muscle, numberOfRep, timer, image) => {
-        console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
+        /*console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
         let session = this.state.session;  
         session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, numberOfRep: numberOfRep, time: timer, image: image}); 
         this.setState({session: session}); 
         let TrainingSessions = this.state.TrainingSessions; 
         TrainingSessions.session
-        //TrainingSessions.se
+        TrainingSessions.se*/
     }
 
     saveChanges =  async() => {
         const JSONstring = JSON.stringify(TrainingSessions);
-        await AsyncStorage.setItem('TrainSessions', JSONstring);
+        await AsyncStorage.setItem('TrainingSessions', JSONstring);
         console.log(JSONstring + ": as been saved");
     }
 
@@ -58,7 +58,7 @@ export class TrainSession extends React.Component {
                 let TrainingSessions = this.state.TrainingSessions; 
                 TrainingSessions[session.key] = session; 
                 this.setState({ session: session, TrainingSessions: TrainingSessions });
-                this.saveChanges(); 
+                //Save('TrainingSessions', this.state.TrainingSessions); 
             }
         }
     }
@@ -73,4 +73,4 @@ export class TrainSession extends React.Component {
 
 }
 
-export default TrainSession
+export default TrainingSessions
