@@ -6,8 +6,11 @@ import { createStackNavigator } from 'react-navigation-stack';
 import SessionsList from './Components/SessionsList.js';
 import TrainSession from './Components/TrainSession.js'; 
 
+
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { CreateSet } from './Components/CreateSet.js';
+
+import StatsExo from './Components/StatsExo.js';
 
 
 navigateToScreen = (app, screen, option) => {
@@ -18,10 +21,11 @@ navigateToScreen = (app, screen, option) => {
 const AppNavigator = createStackNavigator({ //declare all the screen possible of the stack navigator 
   SessionsList: { screen: SessionsList }, // <Name to call>: { screen: <imported Component from above> } 
   TrainSession: { screen: TrainSession }, 
-  CreateSet : { screen: CreateSet }, 
+  CreateSet : { screen: CreateSet },
+  StatsExo: { screen: StatsExo},
 },
   {
-    initialRouteName: 'SessionsList', // What screen the app start at
+    initialRouteName: 'StatsExo', // What screen the app start at
   });
 
 export default createAppContainer(AppNavigator); // create the stack navigator
