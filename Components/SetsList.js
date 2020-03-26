@@ -11,7 +11,6 @@ export class SetsList extends React.Component {
         this.state = {
             session: this.props.navigation.state.params.session,
             TrainingSessions: this.props.navigation.state.params.TrainingSessions,
-            //IsAddSessionVisible: false,
         };
 
     }
@@ -32,7 +31,12 @@ export class SetsList extends React.Component {
     addSession = (name, muscle, numberOfRep, timer, image) => {
         console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
         let session = this.state.session;  
-        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image}); 
+        let success =[];
+        for(let i = 0; i < numberOfRep; i++)
+        {
+            success[i] = null; 
+        } 
+        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image, success: success}); 
         this.setState({session: session}); 
         this.saveChanges(); 
     }
@@ -61,7 +65,7 @@ export class SetsList extends React.Component {
         return (
             <View style={{ backgroundColor: '#e8582c', flex: 1 }}>
                 {this.state.session.Exercices.map( set => 
-                    <PreviewSet restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } delete={() => this.deleteSet(set.key) }/>
+                    <PreviewSet success={set.success} restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } delete={() => this.deleteSet(set.key) }/>
                     )}
             </View>
         )

@@ -1,5 +1,6 @@
 import React from 'react';
 import { AsyncStorage, TouchableOpacity, StyleSheet, View, ScrollView, Image, Text, Dimensions } from 'react-native';
+import SetSuccess from './SetSuccess';
 const HEADER_HEIGHT = 40;
 
 //name = name display on top of the preview
@@ -8,6 +9,7 @@ const HEADER_HEIGHT = 40;
 //restTime = nbrOfRep * 1 + timerToRest
 //nbrRep = the number of little check box 
 //image = background of the view 
+//success = check list of the set
 //... TBC
 
 export class PreviewSession extends React.Component {
@@ -37,7 +39,7 @@ export class PreviewSession extends React.Component {
             <View style={styles.button} >
                 <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, backgroundColor: 'white', justifyContent: 'space-between' }}>
                     <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, textAlignVertical: 'center' }}> {this.props.name}</Text>
-                    <TouchableOpacity style={{ width: 40 }} onPress={this.props.delete}>
+                    <TouchableOpacity style={{ width: 40 }} onPress={ this.props.delete }>
                         <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10, marginLeft: 10 }} source={require('../ico/cross_ico.png')} />
                     </TouchableOpacity>
                 </View>
@@ -45,6 +47,11 @@ export class PreviewSession extends React.Component {
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Muscle : " + this.props.muscle } </Text>
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Time : " + this.renderTime((this.props.restTime + 60) * this.props.nbrRep)}</Text>
                 </View>
+                <ScrollView horizontal={true} style={{flexDirection: 'row'}}>
+                    {this.props.success.map( success => 
+                        <SetSuccess isChecked={ success }/>
+                        )}
+                </ScrollView>
             </View>
         )
     }
