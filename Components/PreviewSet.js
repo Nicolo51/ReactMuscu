@@ -27,21 +27,25 @@ export class PreviewSession extends React.Component {
     }
 
     SetDone = (value) => {
-        let success = this.state.success; 
+        console.log("id travaillé : " + this.state.exerciceKey);
+        let success = this.state.session.Exercices[this.state.exerciceKey].success; 
+        console.log( success.length )
         for(let i = 0; i < success.length; i++){
             if(success[i] == null){
                 success[i] = value;
                 break; 
             }
         }
-        this.setState({success: success});
+        this.state.success = success; 
+        console.log(success.length); 
+        console.log(this.state.success.length);
         this.rebuildSession();
     }
 
     rebuildSession = () => {
         let session = this.state.session; 
         session.Exercices[this.state.exerciceKey].success = this.state.success; 
-        this.setState({session: session}); 
+        this.setState({session: session, success: session.Exercices[this.state.exerciceKey].success}); 
         this.props.saveChanges(session);
     }
 
