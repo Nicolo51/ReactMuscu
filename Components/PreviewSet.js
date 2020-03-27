@@ -21,6 +21,8 @@ export class PreviewSession extends React.Component {
         super(props);
         this.state = {
             success: this.props.success,
+            session: this.props.session, 
+            exerciceKey: this.props.exerciceKey, 
         }
     }
 
@@ -33,6 +35,14 @@ export class PreviewSession extends React.Component {
             }
         }
         this.setState({success: success});
+        this.rebuildSession();
+    }
+
+    rebuildSession = () => {
+        let session = this.state.session; 
+        session.Exercices[this.state.exerciceKey].success = this.state.success; 
+        this.setState({session: session}); 
+        this.props.saveChanges(session);
     }
 
     renderTime = (timer) => {
@@ -68,7 +78,7 @@ export class PreviewSession extends React.Component {
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Muscle : " + this.props.muscle } </Text>
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Time : " + this.renderTime((this.props.restTime + 60) * this.props.nbrRep)}</Text>
                     <ScrollView horizontal={true} style={{marginTop: 13, flexDirection: 'row'}}>
-                    {this.state.success.map( success => 
+                    {this.state.session.Exercices[this.state.exerciceKey].success.map( success => 
                         <SetSuccess isChecked={ success }/>
                         )}
                         <CustomButton style={{marginTop: -20}} text={"done"} onPress={() => this.SetDone(true)}/>
