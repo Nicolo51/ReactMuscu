@@ -1,6 +1,7 @@
 import React from 'react';
 import { AsyncStorage, TouchableOpacity, StyleSheet, View, ScrollView, Image, Text, Dimensions } from 'react-native';
 import SetSuccess from './SetSuccess';
+import CustomButton from './CustomButton';
 const HEADER_HEIGHT = 40;
 
 //name = name display on top of the preview
@@ -13,6 +14,26 @@ const HEADER_HEIGHT = 40;
 //... TBC
 
 export class PreviewSession extends React.Component {
+    /**
+     *
+     */
+    constructor(props) {
+        super(props);
+        this.state = {
+            success: this.props.success,
+        }
+    }
+
+    SetDone = (value) => {
+        let success = this.state.success; 
+        for(let i = 0; i < success.length; i++){
+            if(success[i] == null){
+                success[i] = value;
+                break; 
+            }
+        }
+        this.setState({success: success});
+    }
 
     renderTime = (timer) => {
         let leftOver = timer; 
@@ -47,9 +68,11 @@ export class PreviewSession extends React.Component {
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Muscle : " + this.props.muscle } </Text>
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Time : " + this.renderTime((this.props.restTime + 60) * this.props.nbrRep)}</Text>
                     <ScrollView horizontal={true} style={{marginTop: 13, flexDirection: 'row'}}>
-                    {this.props.success.map( success => 
+                    {this.state.success.map( success => 
                         <SetSuccess isChecked={ success }/>
                         )}
+                        <CustomButton style={{marginTop: -20}} text={"done"} onPress={() => this.SetDone(true)}/>
+                        <CustomButton style={{marginTop: -20}} text={"fail"} onPress={() => this.SetDone(false)}/>
                     </ScrollView>
                 </View>
                 
