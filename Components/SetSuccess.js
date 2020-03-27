@@ -1,23 +1,27 @@
 import React from 'react'; 
 import { View, Image} from 'react-native'; 
+import Images from '../index/';
 
 //isChecked = true: Green check | false : red cross | null : empty ico
 
 export class SetSuccess extends React.Component{
-
+    
+    constructor(props) {
+        super();
+    }
     getImage = (value) => {
         if(value == null)
-            return '../ico/empty_ico.png'
+            return Images.empty_ico;
         if(value == false)
-            return '../ico/uncheck_ico.png'
+            return Images.uncheck_ico;
         if(value == true)    
-            return '../ico/check_ico.png'
+            return Images.check_ico;
     }
 
     render() {
         return(
             <View>
-                <Image style={{ height: 20, width: 20, marginLeft: 10 }} source={require("'../ico/check_ico.png")} /> 
+                <Image style={{ height: 20, width: 20, marginLeft: 10 }} source={this.getImage(this.props.isChecked)} /> 
             </View>
         )
     }

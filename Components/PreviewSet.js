@@ -46,12 +46,13 @@ export class PreviewSession extends React.Component {
                 <View style={{ flex: 1, backgroundColor: 'green' }}>
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Muscle : " + this.props.muscle } </Text>
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Time : " + this.renderTime((this.props.restTime + 60) * this.props.nbrRep)}</Text>
-                </View>
-                <ScrollView horizontal={true} style={{flexDirection: 'row'}}>
+                    <ScrollView horizontal={true} style={{marginTop: 13, flexDirection: 'row'}}>
                     {this.props.success.map( success => 
                         <SetSuccess isChecked={ success }/>
                         )}
-                </ScrollView>
+                    </ScrollView>
+                </View>
+                
             </View>
         )
     }
