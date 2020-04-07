@@ -22,7 +22,7 @@ export class SessionsList extends React.Component {
         };
     }
     static navigationOptions = {
-        title: 'Train Screen',
+        title: 'Training Screen',
         headerStyle: {
             backgroundColor: "#ffffff",
             textAlign: 'center',

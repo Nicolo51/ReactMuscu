@@ -10,7 +10,6 @@ import SetsList from './Components/SetsList.js';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { CreateSet } from './Components/CreateSet.js';
 
-
 navigateToScreen = (app, screen, option) => {
   console.log(option);
   app.props.navigation.navigate(screen, option);
@@ -30,9 +29,9 @@ Load = async (name) => {
         let output = JSON.parse(value);
         return output;
     }
-} catch (error) {
-    console.log("Something went wrong : " + error);
-}
+  } catch (error) {
+      console.log("Something went wrong : " + error);
+  }
 }
 
 const AppNavigator = createStackNavigator({ //declare all the screen possible of the stack navigator 
@@ -45,3 +44,13 @@ const AppNavigator = createStackNavigator({ //declare all the screen possible of
   });
 
 export default createAppContainer(AppNavigator); // create the stack navigator
+
+/*
+[
+  {
+    key: 
+    name: 
+    Exercices[]: 
+  }
+]
+*/
