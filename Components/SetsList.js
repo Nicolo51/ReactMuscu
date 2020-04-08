@@ -22,7 +22,7 @@ export class SetsList extends React.Component {
             textAlign: 'center',
         },
         header: props =>
-        <Header style={StyleElements.header}/>
+            <Header icoName={"white_plus_ico"} onButtonPress={() => self.onAddSessionPress() } tabName={ "Set List Screen" } style={StyleElements.header}/>
     }
 
     addSession = (name, muscle, numberOfRep, timer, image) => {

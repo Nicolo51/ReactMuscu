@@ -9,7 +9,7 @@ export class SetSuccess extends React.Component{
     constructor(props) {
         super();
     }
-    getImage = (value) => {
+    /*getImage = (value) => {
         if(value == null)
             return Images.empty_ico;
         if(value == false)
@@ -17,11 +17,12 @@ export class SetSuccess extends React.Component{
         if(value == true)    
             return Images.check_ico;
     }
-
+    */
+   
     render() {
         return(
             <View>
-                <Image style={{ height: 20, width: 20, marginLeft: 10 }} source={this.getImage(this.props.isChecked)} /> 
+                <Image style={{ height: 20, width: 20, marginLeft: 10 }} source={Images.getImage(this.props.isChecked)} /> 
             </View>
         )
     }

@@ -21,7 +21,7 @@ export class SessionsList extends React.Component {
             TrainingSessions: [],
             IsAddSessionVisible: false,
             loaded: false,
-            
+
         };
     }
     static navigationOptions = {
@@ -31,7 +31,8 @@ export class SessionsList extends React.Component {
             textAlign: 'center',
         },
         header: props =>
-            <Header style={StyleElements.header}/>
+            <Header icoName={"white_plus_ico"} onButtonPress={() => self.addSession()} tabName={ "Session List Screen" } style={StyleElements.header}/>
+
     }
 
     async componentDidMount() {
