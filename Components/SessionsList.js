@@ -21,6 +21,7 @@ export class SessionsList extends React.Component {
             TrainingSessions: [],
             IsAddSessionVisible: false,
             loaded: false,
+            
         };
     }
     static navigationOptions = {
@@ -81,7 +82,7 @@ export class SessionsList extends React.Component {
 
     render() {
         return (
-                <ScrollView style={{ backgroundColor : StyleElements.background.backgroundColor}}> 
+                <ScrollView style={{ backgroundColor : '#fff1f1'}}> 
                     <DialogInput isDialogVisible={this.state.IsAddSessionVisible}
                         title={"Ajouter un entraînement"}
                         message={"Donnez un nom a votre entraînment : "}
@@ -89,21 +90,13 @@ export class SessionsList extends React.Component {
                         submitInput={(inputText) => { this.saveSession(inputText) }}
                         closeDialog={() => { this.setState({ IsAddSessionVisible: false }) }} />
 
-<<<<<<< HEAD
                 <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', paddingTop: 10 }}>
                     {this.state.TrainingSessions.map(session =>
                         <PreviewSession name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'SetsList', { TrainingSessions: this.state.TrainingSessions, session: {key: session.key, name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
                     )}
                 </View>
+                <CustomButton onPress= { () => navigateToScreen(this, 'StatsExo', null)}/>
             </ScrollView>
-=======
-                    <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', paddingTop: 10 }}>
-                        {this.state.TrainingSessions.map(session =>
-                            <PreviewTrain name={ session.key + " : " + session.name } width={WIDTH / 2} onPress={() => navigateToScreen(this, 'TrainSession', {TrainingSessions: this.state.TrainingSessions, session: { name: session.name, Exercices: session.Exercices }} )} delete={() => this.deleteSession(session.key)} />
-                        )}
-                    </View>
-                </ScrollView>
->>>>>>> ErnestWork
         )
     }
 }
