@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image , AsyncStorage} from 'react-native';
 import PreviewSet from './PreviewSet';
+import Header from './Header.js'; 
+import StyleElements from './StyleElements.js';
 
 const HEADER_HEIGHT = 50; 
 
@@ -20,12 +22,7 @@ export class SetsList extends React.Component {
             textAlign: 'center',
         },
         header: props =>
-            <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, justifyContent: 'space-between' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', textAlignVertical: 'center' }}> { self.props.navigation.state.params.session.name } </Text>
-                <TouchableOpacity style={{ marginRight: 10 }} onPress={() => self.onAddSessionPress()}>
-                    <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10 }} source={require('../ico/plus_ico.png')} />
-                </TouchableOpacity>
-            </View>
+        <Header style={StyleElements.header}/>
     }
 
     addSession = (name, muscle, numberOfRep, timer, image) => {

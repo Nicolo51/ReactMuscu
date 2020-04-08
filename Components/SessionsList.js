@@ -81,7 +81,7 @@ export class SessionsList extends React.Component {
 
     render() {
         return (
-                <ScrollView style={{ backgroundColor : '#fff1f1'}}> 
+                <ScrollView style={{ backgroundColor : StyleElements.background.backgroundColor}}> 
                     <DialogInput isDialogVisible={this.state.IsAddSessionVisible}
                         title={"Ajouter un entraînement"}
                         message={"Donnez un nom a votre entraînment : "}
