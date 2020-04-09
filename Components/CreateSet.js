@@ -21,7 +21,6 @@ export class CreateSet extends React.Component{
     static navigationOptions = {
         headerStyle: {
             backgroundColor: "#ffffff",
-            textAlign: 'center',
         }
     }
     onChangeTextName = (text) => {
