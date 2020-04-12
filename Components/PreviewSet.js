@@ -4,6 +4,7 @@ import SetSuccess from './SetSuccess';
 import CustomButton from './CustomButton';
 const HEADER_HEIGHT = 40;
 import Images from '../index/';
+import CountDown from 'react-native-countdown-component';
 
 
 //name = name display on top of the preview
@@ -80,9 +81,23 @@ export class PreviewSession extends React.Component {
                         <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10, marginLeft: 10 }} source={Images.getImage('cross_ico')} />
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, backgroundColor: 'green' }}>
-                    <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Muscle : " + this.props.muscle } </Text>
-                    <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Time : " + this.renderTime((this.props.restTime + 60) * this.props.nbrRep)}</Text>
+
+                <View style={{ flex: 1, backgroundColor: '#fff1f1', flexDirection: 'row' }}>
+                    <Text style={{ marginTop: 10, marginLeft: 5}}>{"- Muscle : " + this.props.muscle } </Text>
+                        <CountDown
+                                style={{marginLeft: 150, marginTop: 5}}
+                                until={60 * 0 + 5}
+                                size={15}
+                                onFinish={() => alert('Repos finis')}
+                                digitStyle={{backgroundColor: '#d32f2f'}}
+                                digitTxtStyle={{color: '#fff1f1' }}
+                                timeToShow={['M', 'S']}
+                            />
+                        </View>
+
+
+                <View style={{ flex: 1, backgroundColor: '#fff1f1' }}>
+                  
                     <ScrollView horizontal={true} style={{marginTop: 13, flexDirection: 'row'}}>
                     {this.state.session.Exercices[this.state.exerciceKey].success.map( success => 
                         <SetSuccess isChecked={ success }/>
@@ -95,6 +110,8 @@ export class PreviewSession extends React.Component {
             </View>
         )
     }
+
+    
 }
 
 const styles = StyleSheet.create({
