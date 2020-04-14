@@ -2,6 +2,7 @@ import React from 'react';
 import { AsyncStorage, TouchableOpacity, StyleSheet, View, ScrollView, Image, Text, Dimensions } from 'react-native';
 import SetSuccess from './SetSuccess';
 import CustomButton from './CustomButton';
+import StyleElements from './StyleElements';
 const HEADER_HEIGHT = 40;
 import Images from '../index/';
 
@@ -71,6 +72,12 @@ export class PreviewSession extends React.Component {
         return output; 
     }
 
+    getColor = (boolValue) => {
+        if(boolValue)
+            return StyleElements.background.backgroundColor;
+        return 'grey';
+    }
+
     render() {
         return (
             <View style={styles.button} >
@@ -80,17 +87,14 @@ export class PreviewSession extends React.Component {
                         <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10, marginLeft: 10 }} source={Images.getImage('cross_ico')} />
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, backgroundColor: 'green' }}>
+                <TouchableOpacity style={{ flex: 1, backgroundColor: this.getColor(this.props.isSelected) }} onPress={this.props.onPress}>
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Muscle : " + this.props.muscle } </Text>
                     <Text style={{ marginTop: 10, marginLeft: 5 }}>{"- Time : " + this.renderTime((this.props.restTime + 60) * this.props.nbrRep)}</Text>
                     <ScrollView horizontal={true} style={{marginTop: 13, flexDirection: 'row'}}>
                     {this.state.session.Exercices[this.state.exerciceKey].success.map( success => 
-                        <SetSuccess isChecked={ success }/>
-                        )}
-                        <CustomButton style={{marginTop: -20}} text={"done"} onPress={() => this.SetDone(true)}/>
-                        <CustomButton style={{marginTop: -20}} text={"fail"} onPress={() => this.SetDone(false)}/>
+                        <SetSuccess isChecked={ success }/>)}
                     </ScrollView>
-                </View>
+                </TouchableOpacity>
                 
             </View>
         )

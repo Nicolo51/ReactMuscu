@@ -3,6 +3,9 @@ import { View, Text, TouchableOpacity, Image , AsyncStorage} from 'react-native'
 import PreviewSet from './PreviewSet';
 import Header from './Header.js'; 
 import StyleElements from './StyleElements.js';
+import CustomButton from './CustomButton.js';
+import { ScrollView } from 'react-native-gesture-handler';
+import Images from '../index.js';
 
 const HEADER_HEIGHT = 50; 
 
@@ -13,6 +16,7 @@ export class SetsList extends React.Component {
         this.state = {
             session: this.props.navigation.state.params.session,
             TrainingSessions: this.props.navigation.state.params.TrainingSessions,
+            selectedSet: 0, 
         };
 
     }
@@ -39,7 +43,6 @@ export class SetsList extends React.Component {
     }
 
     saveChanges = (s) => {
-        console.log("refj " + s);
         let TrainingSessions = this.state.TrainingSessions; 
         let session = s;  
         TrainingSessions[session.key] = session; 
@@ -60,12 +63,76 @@ export class SetsList extends React.Component {
         this.setState({session: session});
         this.saveChanges(session); 
     }
+
+    selectSet = (key) => {
+        console.log("change slected to id : " + key); 
+        this.setState({selectedSet: key}); 
+    }
+
+    setDone = (boolValue, keyExo) => {
+        console.log("id travaillé : " + keyExo);
+        let success = this.state.session.Exercices[keyExo].success; 
+        console.log( success.length )
+        for(let i = 0; i < success.length; i++){
+            if(success[i] == null){
+                success[i] = boolValue;
+                break; 
+            }
+        }
+        console.log(success.length); 
+        this.rebuildSession(keyExo, success);
+    }
+
+    rebuildSession = (keyExo, success) => {
+        let session = this.state.session; 
+        session.Exercices[keyExo].success = success; 
+        this.setState({session: session}); 
+        this.saveChanges(session);
+    }
+
+    resetAllExo = () => {
+        let session = this.state.session; 
+        let exos = session.Exercices; 
+        for (let i = 0 ; i < exos.length; i++){
+            let success = exos[i].success; 
+            for(let j = 0; j < success.length; j++){
+                success[j] = null; 
+            }
+            exos[i].success = success; 
+        }
+        session.Exercices = exos; 
+        this.setState({session: session});
+        this.saveChanges(session);
+    }
+
     render() {
         return (
-            <View style={{ backgroundColor: '#e8582c', flex: 1 }}>
-                {this.state.session.Exercices.map( set => 
-                    <PreviewSet success={set.success} restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } session={this.state.session} exerciceKey={ set.key } saveChanges={(session) => this.saveChanges(session)} delete={() => this.deleteSet(set.key) }/>
-                    )}
+            <View style={{flex : 1}}>
+                <ScrollView style={{ backgroundColor: '#e8582c', flex: 1 }}>
+                    {this.state.session.Exercices.map( set => 
+                        <PreviewSet success={set.success} 
+                        restTime={set.restTime} 
+                        nbrRep={set.nbrRep} 
+                        muscle={set.muscle} 
+                        name={ set.key + " : " + set.name } 
+                        session={this.state.session} 
+                        exerciceKey={ set.key } 
+                        isSelected={set.key === this.state.selectedSet}
+                        saveChanges={(session) => this.saveChanges(session)} 
+                        delete={() => this.deleteSet(set.key) }
+                        onPress={() => this.selectSet(set.key)}/>
+                        )}
+                        <CustomButton text={'reset'} onPress={ () => this.resetAllExo()}/>
+                </ScrollView>
+                <View style={{ flexDirection: 'row', height: 75 }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold'}}> Timer here       |</Text>
+                    <TouchableOpacity style={{ marginLeft: 75, marginTop: 7, height: 50, width: 50}} text={"done"} onPress={() => this.setDone(true, this.state.selectedSet)}>
+                        <Image style={{ height: 50, width: 50, marginLeft: 10 }} source={Images.getImage('check_ico')} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{marginLeft: 50, marginTop: 7}} text={"fail"} onPress={() => this.setDone(false, this.state.selectedSet)}> 
+                        <Image style={{ height: 50, width: 50, marginLeft: 10 }} source={Images.getImage('uncheck_ico')} />
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
