@@ -13,6 +13,7 @@ Done
  - Histograme des poids par exercices (Ernest)
 
 BackLog
- - Timer ( Ernest )
+ - Timer ( Ernest ) 
  - Visualisation de l'exercice en cours (petit truc a cocher et tout) (Nicolas) WIP
  - Gestion de l'upload d'image pour illustrer les exos
+ - Penser a mon doudou d'amour. 
