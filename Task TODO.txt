@@ -1,0 +1,18 @@
+Done
+ - Main menu (plus ou moins )
+ - Ajout de session (plus ou moins)
+ - chart de couleur (peu encore changer)
+ - List exercices
+ - sauvegarde des sessions
+ - Profil d'une personne
+ - Mise a jour de system de sauvegarde  
+ - Sauvegarde des exercices (Nicolas) Done
+ - Chargement des exercices lors du lancement de l'appli (Nicolas) Done
+ - refaire fonctionner le bouton du header
+ - State (Ernest)
+ - Histograme des poids par exercices (Ernest)
+
+BackLog
+ - Timer ( Ernest ) Lit boloss 
+ - Visualisation de l'exercice en cours (petit truc a cocher et tout) (Nicolas) WIP
+ - Gestion de l'upload d'image pour illustrer les exos
