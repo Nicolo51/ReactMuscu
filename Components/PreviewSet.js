@@ -74,7 +74,7 @@ export class PreviewSession extends React.Component {
 
     render() {
         return (
-            <View style={styles.button} >
+            <View style={styles.button}>
                 <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, backgroundColor: 'white', justifyContent: 'space-between' }}>
                     <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, textAlignVertical: 'center' }}> {this.props.name}</Text>
                     <TouchableOpacity style={{ width: 40 }} onPress={ this.props.delete }>
@@ -84,15 +84,7 @@ export class PreviewSession extends React.Component {
 
                 <View style={{ flex: 1, backgroundColor: '#fff1f1', flexDirection: 'row' }}>
                     <Text style={{ marginTop: 10, marginLeft: 5}}>{"- Muscle : " + this.props.muscle } </Text>
-                        <CountDown
-                                style={{marginLeft: 150, marginTop: 5}}
-                                until={60 * 0 + 5}
-                                size={15}
-                                onFinish={() => alert('Repos finis')}
-                                digitStyle={{backgroundColor: '#d32f2f'}}
-                                digitTxtStyle={{color: '#fff1f1' }}
-                                timeToShow={['M', 'S']}
-                            />
+                        
                         </View>
 
 
@@ -108,6 +100,8 @@ export class PreviewSession extends React.Component {
                 </View>
                 
             </View>
+
+            
         )
     }
 
