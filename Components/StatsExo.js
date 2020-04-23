@@ -27,7 +27,7 @@ class Stats extends React.PureComponent {
     render(){
 
 
-       
+       //bite bite 
 
         const poids = [ 60, 60, 65, 65, 70, 70, 70, 75];  // tabeau des poids sur 2 mois
 

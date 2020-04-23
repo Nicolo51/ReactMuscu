@@ -11,7 +11,13 @@ const styles = StyleSheet.create({
 
     background: {
 
-        backgroundColor : '#e35454',
+        backgroundColor : '#fff1f1',
+    },
+
+    footer: {
+        backgroundColor : '#d32f2f',
+        color : '#fff1f1', 
+        height: 100,
     }
 
 })

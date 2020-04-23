@@ -5,6 +5,7 @@ import CustomButton from './CustomButton';
 import StyleElements from './StyleElements';
 const HEADER_HEIGHT = 40;
 import Images from '../index/';
+import CountDown from 'react-native-countdown-component';
 
 
 //name = name display on top of the preview
@@ -80,7 +81,7 @@ export class PreviewSession extends React.Component {
 
     render() {
         return (
-            <View style={styles.button} >
+            <View style={styles.button}>
                 <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, backgroundColor: 'white', justifyContent: 'space-between' }}>
                     <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, textAlignVertical: 'center' }}> {this.props.name}</Text>
                     <TouchableOpacity style={{ width: 40 }} onPress={ this.props.delete }>
@@ -97,8 +98,12 @@ export class PreviewSession extends React.Component {
                 </TouchableOpacity>
                 
             </View>
+
+            
         )
     }
+
+    
 }
 
 const styles = StyleSheet.create({

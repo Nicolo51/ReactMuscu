@@ -1,15 +1,19 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image , AsyncStorage} from 'react-native';
+import { View, Text, TouchableOpacity, Image , AsyncStorage, StyleSheet, Vibration} from 'react-native';
 import PreviewSet from './PreviewSet';
-import Header from './Header.js'; 
+import Header from './Header.js';  
 import StyleElements from './StyleElements.js';
 import CustomButton from './CustomButton.js';
 import { ScrollView } from 'react-native-gesture-handler';
 import Images from '../index.js';
 import DialogInput from 'react-native-dialog-input';
+import CountDown from 'react-native-countdown-component';
+import Sound from 'react-native-sound';
 
 
 const HEADER_HEIGHT = 50; 
+
+
 
 export class SetsList extends React.Component {
     constructor(props) {
@@ -23,6 +27,8 @@ export class SetsList extends React.Component {
         };
 
     }
+
+
     static navigationOptions = {
         headerStyle: {
             backgroundColor: "#ffffff",
@@ -31,6 +37,10 @@ export class SetsList extends React.Component {
         header: props =>
             <Header icoName={"white_plus_ico"} onButtonPress={() => self.onAddSessionPress() } tabName={ "Set List Screen" } style={StyleElements.header}/>
     }
+
+
+    
+
 
     addSession = (name, muscle, numberOfRep, timer, image) => {
         console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
@@ -150,9 +160,37 @@ export class SetsList extends React.Component {
                         <Image style={{ height: 50, width: 50,  }} source={Images.getImage('uncheck_ico')} />
                     </TouchableOpacity>
                 </View>
+            <View style={{ backgroundColor: '#fff1f1', flex: 1 }}>
+
+                <View style={{flex: 8}}>
+                {this.state.session.Exercices.map( set => 
+                    <PreviewSet success={set.success} restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } session={this.state.session} exerciceKey={ set.key } saveChanges={(session) => this.saveChanges(session)} delete={() => this.deleteSet(set.key) }/>
+                    )}
+                </View>
+
+                <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#d32f2f'}}>
+                     <CountDown
+                        size={25}
+                        until={5}
+                        onFinish={() => Vibration.vibrate(800)} 
+                        digitStyle={{backgroundColor: '#d32f2f'}}
+                        digitTxtStyle={{color: '#fff1f1'}}
+                        timeLabelStyle={{color: 'red'}}
+                        separatorStyle={{color: '#fff1f1'}}
+                        timeToShow={['M', 'S']}
+                        timeLabels={{m: null, s: null}}
+                        showSeparator
+                     />
+
+                        <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, marginTop : 20 , color: '#fff1f1'}}> Why U miring me, brah ?</Text>
+                </View>
+
             </View>
+            
         )
     }
+
+
 }
 
 export default SetsList
