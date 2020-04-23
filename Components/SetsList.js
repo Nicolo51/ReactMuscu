@@ -6,6 +6,8 @@ import StyleElements from './StyleElements.js';
 import CustomButton from './CustomButton.js';
 import { ScrollView } from 'react-native-gesture-handler';
 import Images from '../index.js';
+import DialogInput from 'react-native-dialog-input';
+
 
 const HEADER_HEIGHT = 50; 
 
@@ -14,6 +16,7 @@ export class SetsList extends React.Component {
         super(props);
         self = this;
         this.state = {
+            isFailVisible: false, 
             session: this.props.navigation.state.params.session,
             TrainingSessions: this.props.navigation.state.params.TrainingSessions,
             selectedSet: 0, 
@@ -69,13 +72,20 @@ export class SetsList extends React.Component {
         this.setState({selectedSet: key}); 
     }
 
-    setDone = (boolValue, keyExo) => {
+    setDone = (value, keyExo) => {
+        if(value == false){
+            this.setState({isFailVisible: true})
+            return; 
+        }
         console.log("id travaillé : " + keyExo);
         let success = this.state.session.Exercices[keyExo].success; 
         console.log( success.length )
         for(let i = 0; i < success.length; i++){
             if(success[i] == null){
-                success[i] = boolValue;
+                success[i] = value;
+                if(this.state.isFailVisible){
+                    this.setState({isFailVisible: false})
+                }
                 break; 
             }
         }
@@ -108,6 +118,11 @@ export class SetsList extends React.Component {
     render() {
         return (
             <View style={{flex : 1}}>
+                <DialogInput isDialogVisible={this.state.isFailVisible}
+                        title={"Raté pour cette fois :("}
+                        message={"Combien de rep avez vous réussi a faire ?"}
+                        submitInput={(inputText) => { this.setDone(inputText, this.state.selectedSet) }}
+                        closeDialog={() => { this.setState({ isFailVisible: false }) }} />
                 <ScrollView style={{ backgroundColor: '#e8582c', flex: 1 }}>
                     {this.state.session.Exercices.map( set => 
                         <PreviewSet success={set.success} 
@@ -125,12 +140,14 @@ export class SetsList extends React.Component {
                         <CustomButton text={'reset'} onPress={ () => this.resetAllExo()}/>
                 </ScrollView>
                 <View style={{ flexDirection: 'row', height: 75 }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold'}}> Timer here       |</Text>
-                    <TouchableOpacity style={{ marginLeft: 75, marginTop: 7, height: 50, width: 50}} text={"done"} onPress={() => this.setDone(true, this.state.selectedSet)}>
-                        <Image style={{ height: 50, width: 50, marginLeft: 10 }} source={Images.getImage('check_ico')} />
+                    <View style={{backgroundColor: 'green', flex: 2}}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold'}}> Timer here       |</Text>
+                    </View>
+                    <TouchableOpacity style={{backgroundColor: 'red', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(true, this.state.selectedSet)}>
+                        <Image style={{ height: 50, width: 50 }} source={Images.getImage('check_ico')} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{marginLeft: 50, marginTop: 7}} text={"fail"} onPress={() => this.setDone(false, this.state.selectedSet)}> 
-                        <Image style={{ height: 50, width: 50, marginLeft: 10 }} source={Images.getImage('uncheck_ico')} />
+                    <TouchableOpacity style={{ backgroundColor: 'blue', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(false, this.state.selectedSet)}> 
+                        <Image style={{ height: 50, width: 50,  }} source={Images.getImage('uncheck_ico')} />
                     </TouchableOpacity>
                 </View>
             </View>
