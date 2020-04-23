@@ -11,6 +11,8 @@ import StatsExo from './Components/StatsExo.js';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { CreateSet } from './Components/CreateSet.js';
 
+
+
 navigateToScreen = (app, screen, option) => {
   console.log(option);
   app.props.navigation.navigate(screen, option);
