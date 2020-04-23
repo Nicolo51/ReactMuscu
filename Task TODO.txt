@@ -6,6 +6,7 @@ Done
  - sauvegarde des sessions
  - Profil d'une personne
  - Mise a jour de system de sauvegarde  
+<<<<<<< HEAD
  - Sauvegarde des exercices (Nicolas) Done
  - Chargement des exercices lors du lancement de l'appli (Nicolas) Done
  - refaire fonctionner le bouton du header
@@ -15,4 +16,15 @@ Done
 BackLog
  - Timer ( Ernest ) Lit boloss 
  - Visualisation de l'exercice en cours (petit truc a cocher et tout) (Nicolas) WIP
+=======
+
+BackLog
+ - Sauvegarde des exercices (Nicolas) Done
+ - Chargement des exercices lors du lancement de l'appli (Nicolas) Done
+ - refaire fonctionner le bouton du header
+ - Histograme des poids par exercices (Ernest)
+ - State (Ernest)
+ - Timer
+ - Visualisation de l'exercice en cours (petit truc a cocher et tout) (Nicolas) 
+>>>>>>> a40ca7c30cdb75c9a460335e90b4797ca9f5703d
  - Gestion de l'upload d'image pour illustrer les exos

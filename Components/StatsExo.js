@@ -7,7 +7,11 @@ import StyleElements from './StyleElements.js';
 
 
 class Stats extends React.PureComponent {
-
+    
+    constructor(props) {
+        super(props);
+        self = this;  
+    }
     static navigationOptions = {
         title: 'Train Screen',
         headerStyle: {
@@ -15,14 +19,15 @@ class Stats extends React.PureComponent {
             textAlign: 'center',
         },
         header: props =>
-            <Header style={StyleElements.header}/>
+        <Header icoName={"cross_ico"} onButtonPress={() => self.props.navigation.goBack()} tabName={ "Stats Exo Screen" } style={StyleElements.header}/>
+
     }
 
 
     render(){
 
 
-       
+       //bite bite 
 
         const poids = [ 60, 60, 65, 65, 70, 70, 70, 75];  // tabeau des poids sur 2 mois
 
