@@ -4,7 +4,7 @@ import PreviewSet from './PreviewSet';
 import Header from './Header.js';  
 import StyleElements from './StyleElements.js';
 import CountDown from 'react-native-countdown-component';
-import Sound from 'react-native-sound';
+
 
 
 const HEADER_HEIGHT = 50; 
