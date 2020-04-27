@@ -71,6 +71,15 @@ export class SetsList extends React.Component {
         this.setState({session: session});
         this.saveChanges(session); 
     }
+
+    finishChrono = () => {
+        Vibration.vibrate(800);
+        alert('Good Job Brah, take a rest for the next one !');
+    }
+
+
+
+    
     render() {
         return (
             <View style={{ backgroundColor: '#fff1f1', flex: 1 }}>
@@ -85,7 +94,7 @@ export class SetsList extends React.Component {
                      <CountDown
                         size={25}
                         until={5}
-                        onFinish={() => Vibration.vibrate(800)} 
+                        onFinish={() => this.finishChrono()} 
                         digitStyle={{backgroundColor: '#d32f2f'}}
                         digitTxtStyle={{color: '#fff1f1'}}
                         timeLabelStyle={{color: 'red'}}
