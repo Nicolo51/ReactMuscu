@@ -20,22 +20,12 @@ class Stats extends React.PureComponent {
         },
         header: props =>
         <Header icoName={"cross_ico"} onButtonPress={() => self.props.navigation.goBack()} tabName={ "Stats Exo Screen" } style={StyleElements.header}/>
-
     }
 
-
     render(){
-
-
-       //bite bite 
-
         const poids = [ 60, 60, 65, 65, 70, 70, 70, 75];  // tabeau des poids sur 2 mois
-
- 
         const contentInset = { top: 20, bottom: 20 }
- 
         return (
-
         <View>
             <View style={{ height: 200, flexDirection: 'row' }}>
                     <YAxis

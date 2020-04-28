@@ -11,12 +11,24 @@ Done
  - refaire fonctionner le bouton du header
  - State (Ernest)
  - Histograme des poids par exercices (Ernest)
+ - Timer (Ernest)
+
 
 BackLog
- - Sauvegarde des exercices (Nicolas) Done
- - Chargement des exercices lors du lancement de l'appli (Nicolas) Done
- - refaire fonctionner le bouton du header
- - State (Ernest)
- - Histograme des poids par exercices (Ernest)
  - Visualisation de l'exercice en cours (petit truc a cocher et tout) (Nicolas) WIP
- - Timer ( Ernest ) 
+ - Gestion de l'upload d'image pour illustrer les exos(Nicolas)
+ - Travailler sur un design et comment valider ou non un set
+ - Tuile :  - header : 
+                - nom de l'exo
+                - edit button (dans l'edit tu peux suppr)
+            - body : 
+                - Nombre de set et de rep (4 x 12)
+                - La charge 
+                - stickers de validation ou d'echec 
+                - L'image 
+            - function : 
+                - capacité de cliquer dessus pour selectionner l'exo et griser les autres
+- Footer set list sceren : 
+            - timer 
+            - deux button pour valider ou in-valider un exo     
+            - footer la que quand il est utilisé  

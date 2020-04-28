@@ -8,12 +8,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Images from '../index.js';
 import DialogInput from 'react-native-dialog-input';
 import CountDown from 'react-native-countdown-component';
-import Sound from 'react-native-sound';
-
-
-const HEADER_HEIGHT = 50; 
-
-
 
 export class SetsList extends React.Component {
     constructor(props) {
@@ -37,10 +31,6 @@ export class SetsList extends React.Component {
         header: props =>
             <Header icoName={"white_plus_ico"} onButtonPress={() => self.onAddSessionPress() } tabName={ "Set List Screen" } style={StyleElements.header}/>
     }
-
-
-    
-
 
     addSession = (name, muscle, numberOfRep, timer, image) => {
         console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
@@ -93,7 +83,7 @@ export class SetsList extends React.Component {
         for(let i = 0; i < success.length; i++){
             if(success[i] == null){
                 success[i] = value;
-                if(this.state.isFailVisible){
+                if(this.state.isFailVisible){; 
                     this.setState({isFailVisible: false})
                 }
                 break; 
@@ -150,47 +140,31 @@ export class SetsList extends React.Component {
                         <CustomButton text={'reset'} onPress={ () => this.resetAllExo()}/>
                 </ScrollView>
                 <View style={{ flexDirection: 'row', height: 75 }}>
-                    <View style={{backgroundColor: 'green', flex: 2}}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold'}}> Timer here       |</Text>
+                    <View style={{flex: 2}}>
+                    <CountDown
+                            style={{marginTop: 5}}
+                            size={25}
+                            until={90}
+                            onFinish={() => Vibration.vibrate(800)} 
+                            digitStyle={{backgroundColor: '#d32f2f'}}
+                            digitTxtStyle={{color: '#fff1f1'}}
+                            timeLabelStyle={{color: 'red'}}
+                            separatorStyle={{color: '#fff1f1'}}
+                            timeToShow={['M', 'S']}
+                            timeLabels={{m: null, s: null}}
+                            showSeparator
+                        />
                     </View>
-                    <TouchableOpacity style={{backgroundColor: 'red', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(true, this.state.selectedSet)}>
+                    <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(true, this.state.selectedSet)}>
                         <Image style={{ height: 50, width: 50 }} source={Images.getImage('check_ico')} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor: 'blue', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(false, this.state.selectedSet)}> 
+                    <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(false, this.state.selectedSet)}> 
                         <Image style={{ height: 50, width: 50,  }} source={Images.getImage('uncheck_ico')} />
                     </TouchableOpacity>
                 </View>
-            <View style={{ backgroundColor: '#fff1f1', flex: 1 }}>
-
-                <View style={{flex: 8}}>
-                {this.state.session.Exercices.map( set => 
-                    <PreviewSet success={set.success} restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } session={this.state.session} exerciceKey={ set.key } saveChanges={(session) => this.saveChanges(session)} delete={() => this.deleteSet(set.key) }/>
-                    )}
-                </View>
-
-                <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#d32f2f'}}>
-                     <CountDown
-                        size={25}
-                        until={5}
-                        onFinish={() => Vibration.vibrate(800)} 
-                        digitStyle={{backgroundColor: '#d32f2f'}}
-                        digitTxtStyle={{color: '#fff1f1'}}
-                        timeLabelStyle={{color: 'red'}}
-                        separatorStyle={{color: '#fff1f1'}}
-                        timeToShow={['M', 'S']}
-                        timeLabels={{m: null, s: null}}
-                        showSeparator
-                     />
-
-                        <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, marginTop : 20 , color: '#fff1f1'}}> Why U miring me, brah ?</Text>
-                </View>
-
             </View>
-            
         )
     }
-
-
 }
 
 export default SetsList
