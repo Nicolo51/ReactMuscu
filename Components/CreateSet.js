@@ -16,8 +16,8 @@ export class CreateSet extends React.Component{
             seconds: 0, 
             image: '', 
         };
-
     }
+    
     static navigationOptions = {
         headerStyle: {
             backgroundColor: "#ffffff",
