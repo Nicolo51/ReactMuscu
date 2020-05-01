@@ -28,6 +28,8 @@ const images = {
             return images.uncheck_ico;
         if(value == true)    
             return images.check_ico;
+        if(value == "bibi")    
+            return images.bibi;
         else
             return images.missing_texture;
     },
@@ -37,7 +39,8 @@ const images = {
     empty_ico: require("./ico/empty_ico.png"),
     plus_ico: require("./ico/plus_ico.png"),
     uncheck_ico: require("./ico/uncheck_ico.png"), 
-    missing_texture: require("./ico/missing_texture.png"), 
+    missing_texture: require("./ico/missing_texture.png"),
+    bibi: require("./ico/bibi.png"),
 }
 export default images; 
 

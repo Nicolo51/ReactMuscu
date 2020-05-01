@@ -75,27 +75,28 @@ export class PreviewSession extends React.Component {
     render() {
         return (
             <View style={styles.button}>
-                <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, backgroundColor: 'white', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', height: HEADER_HEIGHT, backgroundColor: '#fff1f1', justifyContent: 'space-between' }}>
                     <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, textAlignVertical: 'center' }}> {this.props.name}</Text>
                     <TouchableOpacity style={{ width: 40 }} onPress={ this.props.delete }>
                         <Image style={{ height: HEADER_HEIGHT - 20, width: HEADER_HEIGHT - 20, marginTop: 10, marginLeft: 10 }} source={Images.getImage('cross_ico')} />
                     </TouchableOpacity>
                 </View>
 
-                <View style={{ flex: 1, backgroundColor: '#fff1f1', flexDirection: 'row' }}>
-                    <Text style={{ marginTop: 10, marginLeft: 5}}>{"- Muscle : " + this.props.muscle } </Text>
+                <View style={{ flex: 1, flexDirection: 'row' }}>
+                <Image style={{ height: 100, width:  100, marginTop: 5, marginLeft: 5 }} source={Images.getImage('bibi')} />
+                    <Text style={{ marginTop: 15, marginLeft: 100}}>{" Set x Rep "  } </Text>
+
                         
                         </View>
 
 
-                <View style={{ flex: 1, backgroundColor: '#fff1f1' }}>
+                <View style={{ flex: 1 }}>
                   
-                    <ScrollView horizontal={true} style={{marginTop: 13, flexDirection: 'row'}}>
+                    <ScrollView horizontal={true} style={{marginTop: 13, marginLeft: 150, flexDirection: 'row'}}>
                     {this.state.session.Exercices[this.state.exerciceKey].success.map( success => 
                         <SetSuccess isChecked={ success }/>
                         )}
-                        <CustomButton style={{marginTop: -20}} text={"done"} onPress={() => this.SetDone(true)}/>
-                        <CustomButton style={{marginTop: -20}} text={"fail"} onPress={() => this.SetDone(false)}/>
+                        
                     </ScrollView>
                 </View>
                 
