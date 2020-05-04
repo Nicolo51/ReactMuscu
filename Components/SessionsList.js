@@ -4,7 +4,6 @@ import DialogInput from 'react-native-dialog-input';
 
 import PreviewSession from './PreviewSession.js'
 import CustomButton from './CustomButton.js';
-import SetsList from './SetsList.js';
 import Header from './Header.js'; 
 import StyleElements from './StyleElements.js'; 
 

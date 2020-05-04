@@ -135,7 +135,9 @@ export class SetsList extends React.Component {
                         isSelected={set.key === this.state.selectedSet}
                         saveChanges={(session) => this.saveChanges(session)} 
                         delete={() => this.deleteSet(set.key) }
-                        onPress={() => this.selectSet(set.key)}/>
+                        onPress={() => this.selectSet(set.key)}
+                        parent={this}
+                        />
                         )}
                         <CustomButton text={'reset'} onPress={ () => this.resetAllExo()}/>
                 </ScrollView>

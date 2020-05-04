@@ -5,6 +5,7 @@ import CustomButton from './CustomButton';
 const HEADER_HEIGHT = 40;
 import Images from '../index/';
 import CountDown from 'react-native-countdown-component';
+import ExoNote from './ExoNote.js';
 
 
 //name = name display on top of the preview
@@ -22,6 +23,7 @@ export class PreviewSession extends React.Component {
      */
     constructor(props) {
         super(props);
+        parent = this.props.parent; 
         this.state = {
             success: this.props.success,
             session: this.props.session, 
@@ -83,8 +85,14 @@ export class PreviewSession extends React.Component {
                 </View>
 
                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                <Image style={{ height: 100, width:  100, marginTop: 5, marginLeft: 5 }} source={Images.getImage('bibi')} />
-                    <Text style={{ marginTop: 15, marginLeft: 100}}>{" Set x Rep "  } </Text>
+                <TouchableOpacity style={{height: 100, width:  100, marginTop: 5, marginLeft: 5 }} onPress={() => navigateToScreen(parent, 'ExoNote', null )}>
+                    <Image style={{ height: 100, width:  100}} source={Images.getImage('bibi')} />
+                </TouchableOpacity>
+
+                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                         <Text style={{ marginTop: 5, marginLeft: 100}}>{" Set x Rep "  } </Text>
+                         <Text style={{ marginTop: 5, marginLeft: 115}}>{" Poids "  } </Text>
+                    </View>
 
                         
                         </View>
