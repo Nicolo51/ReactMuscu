@@ -100,7 +100,7 @@ export class PreviewSession extends React.Component {
 
                 <View style={{ flex: 1 }}>
                   
-                    <ScrollView horizontal={true} style={{marginTop: 13, marginLeft: 150, flexDirection: 'row'}}>
+                    <ScrollView horizontal={true} style={{marginTop: 25, marginLeft: 110, flexDirection: 'row'}}>
                     {this.state.session.Exercices[this.state.exerciceKey].success.map( success => 
                         <SetSuccess isChecked={ success }/>
                         )}

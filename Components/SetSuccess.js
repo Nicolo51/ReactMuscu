@@ -12,7 +12,7 @@ export class SetSuccess extends React.Component{
     
    renderNumber = (value) => {
        if(value < 10){
-        return (<Text style={{color: 'red', marginTop: -22, marginLeft:1 , fontWeight: 'bold', fontSize: 17}}> { value }</Text>)
+        return (<Text style={{color: 'red', marginTop: -22, marginLeft:15, fontWeight: 'bold', fontSize: 17}}> { value }</Text>)
        }
        if (value < 100){
         return (<Text style={{color: 'red', marginTop: -20, marginLeft:-2 , fontWeight: 'bold', fontSize: 14}}> { value }</Text>)

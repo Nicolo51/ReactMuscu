@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image , AsyncStorage, StyleSheet, Vibration} from 'react-native';
+import { View, Text, TouchableOpacity, Image , AsyncStorage, StyleSheet, Vibration, Alert} from 'react-native';
 import PreviewSet from './PreviewSet';
 import Header from './Header.js';  
 import StyleElements from './StyleElements.js';
@@ -113,7 +113,18 @@ export class SetsList extends React.Component {
         session.Exercices = exos; 
         this.setState({session: session});
         this.saveChanges(session);
+
     }
+
+
+    finishChrono = () => {
+        Vibration.vibrate(800);
+        alert('tu es le best bro !');
+
+    }
+    
+
+
 
     render() {
         return (
@@ -146,8 +157,8 @@ export class SetsList extends React.Component {
                     <CountDown
                             style={{marginTop: 5}}
                             size={25}
-                            until={90}
-                            onFinish={() => Vibration.vibrate(800)} 
+                            until={5}
+                            onFinish={ () => this.finishChrono()} 
                             digitStyle={{backgroundColor: '#d32f2f'}}
                             digitTxtStyle={{color: '#fff1f1'}}
                             timeLabelStyle={{color: 'red'}}
@@ -158,7 +169,7 @@ export class SetsList extends React.Component {
                         />
                     </View>
                     <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(true, this.state.selectedSet)}>
-                        <Image style={{ height: 50, width: 50 }} source={Images.getImage('check_ico')} />
+                        <Image style={{ height: 50, width: 50 }} source={Images.getImage('checking_ico')} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(false, this.state.selectedSet)}> 
                         <Image style={{ height: 50, width: 50,  }} source={Images.getImage('uncheck_ico')} />
