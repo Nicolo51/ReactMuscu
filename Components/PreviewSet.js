@@ -91,7 +91,7 @@ export class PreviewSession extends React.Component {
 
                     <View style={{ flex: 1, flexDirection: 'column' }}>
                          <Text style={{ marginTop: 5, marginLeft: 100}}>{" Set x Rep "  } </Text>
-                         <Text style={{ marginTop: 5, marginLeft: 115}}>{" Poids "  } </Text>
+                         <Text style={{ marginTop: 5, marginLeft: 115}}> {this.props.weith} {" Kg"} </Text>
                     </View>
 
                         

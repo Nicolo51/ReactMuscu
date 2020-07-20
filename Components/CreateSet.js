@@ -10,6 +10,7 @@ export class CreateSet extends React.Component{
         this.state = {
             name: '',
             muscle: '', 
+            weith: '',
             numberOfRep: 1,
             timer: 60, 
             minutes: 1, 
@@ -51,6 +52,10 @@ export class CreateSet extends React.Component{
         this.setState({muscle: text});
     }
 
+    onChangeTextWeith = (text) => {
+        this.setState({weith: text});
+    }
+
     checkNumber = () =>{
         let nbr = parseInt(this.state.numberOfRep); 
         if( nbr.toString() == "NaN" ){
@@ -65,7 +70,7 @@ export class CreateSet extends React.Component{
 
     createSet = () => {
         console.log("create"); 
-        this.props.navigation.state.params.onGoBack(this.state.name, this.state.muscle, this.state.numberOfRep, this.state.timer, this.state.image); 
+        this.props.navigation.state.params.onGoBack(this.state.name, this.state.muscle, this.state.numberOfRep, this.state.timer, this.state.image, this.state.weith); 
         this.props.navigation.goBack();
     }
 
@@ -86,12 +91,16 @@ export class CreateSet extends React.Component{
         return(
         <View> 
              <View style={styles.center}>
-                 <Text> Name : </Text>
+                 <Text> Exercice : </Text>
                 <CustomTextInput  style={ styles.textInput } value={ this.state.name } onChangeText ={(text) => this.onChangeTextName(text)}></CustomTextInput>
             </View>
             <View style={ styles.center }>
                  <Text> Muscle : </Text>
                 <CustomTextInput style={ styles.textInput } value={ this.state.muscle } onChangeText={(text) => this.onChangeTextMuscle(text)}></CustomTextInput>
+            </View>
+            <View style={ styles.center }>
+                 <Text> Weith (Kg): </Text>
+                <CustomTextInput keyboardType={'numeric'} style={{ marginTop: 15,marginRight: 40, width:80, height: 50}} value={ this.state.weith } onChangeText={(text) => this.onChangeTextWeith(text)}></CustomTextInput>
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 10 }}>
                 <Text> Number of Rep : </Text>
