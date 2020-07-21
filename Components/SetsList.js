@@ -32,7 +32,7 @@ export class SetsList extends React.Component {
             <Header icoName={"white_plus_ico"} onButtonPress={() => self.onAddSessionPress() } tabName={ "Set List Screen" } style={StyleElements.header}/>
     }
 
-    addSession = (name, muscle, numberOfRep, timer, image) => {
+    addSession = (name, muscle, numberOfRep, timer, image, weith) => {
         console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
         let session = this.state.session;  
         let success =[];
@@ -40,7 +40,7 @@ export class SetsList extends React.Component {
         {
             success[i] = null; 
         } 
-        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image, success: success}); 
+        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image, weith: weith, success: success}); 
         this.setState({session: session}); 
         this.saveChanges(session); 
     }
@@ -53,7 +53,7 @@ export class SetsList extends React.Component {
     }
 
     onAddSessionPress = () => {
-        navigateToScreen(this, 'CreateSet', { onGoBack: (name, muscle, numberOfRep, timer, image) => this.addSession(name, muscle, numberOfRep, timer, image) }); 
+        navigateToScreen(this, 'CreateSet', { onGoBack: (name, muscle, numberOfRep, timer, image, weith) => this.addSession(name, muscle, numberOfRep, timer, image, weith) }); 
     }
 
     deleteSet = (key) => {
@@ -138,6 +138,7 @@ export class SetsList extends React.Component {
                     {this.state.session.Exercices.map( set => 
                         <PreviewSet success={set.success} 
                         restTime={set.restTime} 
+                        weith={set.weith}
                         nbrRep={set.nbrRep} 
                         muscle={set.muscle} 
                         name={ set.key + " : " + set.name } 
