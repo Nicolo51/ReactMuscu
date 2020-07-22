@@ -32,7 +32,7 @@ export class SetsList extends React.Component {
             <Header icoName={"white_plus_ico"} onButtonPress={() => self.onAddSessionPress() } tabName={ "Set List Screen" } style={StyleElements.header}/>
     }
 
-    addSession = (name, muscle, numberOfRep, timer, image, weith) => {
+    addSession = (name, muscle, numberOfRep, timer, image, weith, sets) => {
         console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
         let session = this.state.session;  
         let success =[];
@@ -40,7 +40,7 @@ export class SetsList extends React.Component {
         {
             success[i] = null; 
         } 
-        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image, weith: weith, success: success}); 
+        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image, weith: weith, sets: sets, success: success}); 
         this.setState({session: session}); 
         this.saveChanges(session); 
     }
@@ -53,7 +53,7 @@ export class SetsList extends React.Component {
     }
 
     onAddSessionPress = () => {
-        navigateToScreen(this, 'CreateSet', { onGoBack: (name, muscle, numberOfRep, timer, image, weith) => this.addSession(name, muscle, numberOfRep, timer, image, weith) }); 
+        navigateToScreen(this, 'CreateSet', { onGoBack: (name, muscle, numberOfRep, timer, image, weith, sets) => this.addSession(name, muscle, numberOfRep, timer, image, weith, sets) }); 
     }
 
     deleteSet = (key) => {
@@ -139,6 +139,7 @@ export class SetsList extends React.Component {
                         <PreviewSet success={set.success} 
                         restTime={set.restTime} 
                         weith={set.weith}
+                        sets={set.sets}
                         nbrRep={set.nbrRep} 
                         muscle={set.muscle} 
                         name={ set.key + " : " + set.name } 

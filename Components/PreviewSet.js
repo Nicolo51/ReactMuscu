@@ -90,7 +90,7 @@ export class PreviewSession extends React.Component {
                 </TouchableOpacity>
 
                     <View style={{ flex: 1, flexDirection: 'column' }}>
-                         <Text style={{ marginTop: 5, marginLeft: 100}}>{" Set x Rep "  } </Text>
+                         <Text style={{ marginTop: 5, marginLeft: 100}}>{this.props.sets} {" x "} {this.props.nbrRep} </Text>
                          <Text style={{ marginTop: 5, marginLeft: 115}}> {this.props.weith} {" Kg"} </Text>
                     </View>
 
