@@ -36,7 +36,7 @@ export class SetsList extends React.Component {
         console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
         let session = this.state.session;  
         let success =[];
-        for(let i = 0; i < numberOfRep; i++)
+        for(let i = 0; i < sets; i++)
         {
             success[i] = null; 
         } 
