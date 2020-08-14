@@ -34,7 +34,7 @@ export class ExoNote extends React.Component {
                     <View style={{height: 250, width:  300, marginTop: 10, marginLeft:25}}>
                          <TextInput
                                 underlineColorAndroid="transparent"
-                                placeholder="Some notes for this set bro ?"
+                                placeholder="Some notes for This set bro ?"
                                 placeholderTextColor="grey"
                                 numberOfLines={20}
                                 multiline={true}
