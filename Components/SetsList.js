@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image , AsyncStorage, StyleSheet, Vibration} from 'react-native';
+import { View, Text, TouchableOpacity, Image , AsyncStorage, StyleSheet, Vibration, Alert} from 'react-native';
 import PreviewSet from './PreviewSet';
 import Header from './Header.js';  
 import StyleElements from './StyleElements.js';
@@ -8,12 +8,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Images from '../index.js';
 import DialogInput from 'react-native-dialog-input';
 import CountDown from 'react-native-countdown-component';
-import Sound from 'react-native-sound';
-
-
-const HEADER_HEIGHT = 50; 
-
-
 
 export class SetsList extends React.Component {
     constructor(props) {
@@ -27,8 +21,6 @@ export class SetsList extends React.Component {
         };
 
     }
-
-
     static navigationOptions = {
         headerStyle: {
             backgroundColor: "#ffffff",
@@ -38,19 +30,15 @@ export class SetsList extends React.Component {
             <Header icoName={"white_plus_ico"} onButtonPress={() => self.onAddSessionPress() } tabName={ "Set List Screen" } style={StyleElements.header}/>
     }
 
-
-    
-
-
-    addSession = (name, muscle, numberOfRep, timer, image) => {
+    addSession = (name, muscle, numberOfRep, timer, image, weith, sets) => {
         console.log(name + " : " + muscle + " : " + numberOfRep + " : " + timer + " : " + image); 
         let session = this.state.session;  
         let success =[];
-        for(let i = 0; i < numberOfRep; i++)
+        for(let i = 0; i < sets; i++)
         {
             success[i] = null; 
         } 
-        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image, success: success}); 
+        session.Exercices.push({key: this.state.session.Exercices.length, name: name, muscle: muscle, nbrRep: numberOfRep, restTime: timer, image: image, weith: weith, sets: sets, success: success}); 
         this.setState({session: session}); 
         this.saveChanges(session); 
     }
@@ -63,7 +51,7 @@ export class SetsList extends React.Component {
     }
 
     onAddSessionPress = () => {
-        navigateToScreen(this, 'CreateSet', { onGoBack: (name, muscle, numberOfRep, timer, image) => this.addSession(name, muscle, numberOfRep, timer, image) }); 
+        navigateToScreen(this, 'CreateSet', { onGoBack: (name, muscle, numberOfRep, timer, image, weith, sets) => this.addSession(name, muscle, numberOfRep, timer, image, weith, sets) }); 
     }
 
     deleteSet = (key) => {
@@ -161,8 +149,7 @@ export class SetsList extends React.Component {
                     </TouchableOpacity>
                 </View>
             <View style={{ backgroundColor: '#fff1f1', flex: 1 }}>
-
-                <View style={{flex: 8}}>
+            <View style={{flex: 8}}>
                 {this.state.session.Exercices.map( set => 
                     <PreviewSet success={set.success} restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } session={this.state.session} exerciceKey={ set.key } saveChanges={(session) => this.saveChanges(session)} delete={() => this.deleteSet(set.key) }/>
                     )}
@@ -186,11 +173,58 @@ export class SetsList extends React.Component {
                 </View>
 
             </View>
-            
+        </View>
         )
     }
 
+    selectSet = (key) => {
+        console.log("change slected to id : " + key); 
+        this.setState({selectedSet: key}); 
+    }
 
+    setDone = (value, keyExo) => {
+        if(value == false){
+            this.setState({isFailVisible: true})
+            return; 
+        }
+        console.log("id travaillé : " + keyExo);
+        let success = this.state.session.Exercices[keyExo].success; 
+        console.log( success.length )
+        for(let i = 0; i < success.length; i++){
+            if(success[i] == null){
+                success[i] = value;
+                if(this.state.isFailVisible){; 
+                    this.setState({isFailVisible: false})
+                }
+                break; 
+            }
+        }
+        console.log(success.length); 
+        this.rebuildSession(keyExo, success);
+    }
+
+    rebuildSession = (keyExo, success) => {
+        let session = this.state.session; 
+        session.Exercices[keyExo].success = success; 
+        this.setState({session: session}); 
+        this.saveChanges(session);
+    }
+
+    resetAllExo = () => {
+        let session = this.state.session; 
+        let exos = session.Exercices; 
+        for (let i = 0 ; i < exos.length; i++){
+            let success = exos[i].success; 
+            for(let j = 0; j < success.length; j++){
+                success[j] = null; 
+            }
+            exos[i].success = success; 
+        }
+        session.Exercices = exos; 
+        this.setState({session: session});
+        this.saveChanges(session);
+
+    }
 }
 
 export default SetsList
