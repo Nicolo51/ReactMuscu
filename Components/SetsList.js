@@ -121,7 +121,7 @@ export class SetsList extends React.Component {
                         message={"Combien de rep avez vous réussi a faire ?"}
                         submitInput={(inputText) => { this.setDone(inputText, this.state.selectedSet) }}
                         closeDialog={() => { this.setState({ isFailVisible: false }) }} />
-                <ScrollView style={{ backgroundColor: '#e8582c', flex: 1 }}>
+                <ScrollView style={{ backgroundColor: '#fff1f1', flex: 1 }}>
                     {this.state.session.Exercices.map( set => 
                         <PreviewSet success={set.success} 
                         restTime={set.restTime} 
@@ -133,30 +133,16 @@ export class SetsList extends React.Component {
                         isSelected={set.key === this.state.selectedSet}
                         saveChanges={(session) => this.saveChanges(session)} 
                         delete={() => this.deleteSet(set.key) }
-                        onPress={() => this.selectSet(set.key)}/>
+                        onPress={() => this.selectSet(set.key)}
+                        parent={this}/>
                         )}
                         <CustomButton text={'reset'} onPress={ () => this.resetAllExo()}/>
                 </ScrollView>
+                
                 <View style={{ flexDirection: 'row', height: 75 }}>
                     <View style={{backgroundColor: 'green', flex: 2}}>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold'}}> Timer here       |</Text>
-                    </View>
-                    <TouchableOpacity style={{backgroundColor: 'red', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(true, this.state.selectedSet)}>
-                        <Image style={{ height: 50, width: 50 }} source={Images.getImage('check_ico')} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor: 'blue', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(false, this.state.selectedSet)}> 
-                        <Image style={{ height: 50, width: 50,  }} source={Images.getImage('uncheck_ico')} />
-                    </TouchableOpacity>
-                </View>
-            <View style={{ backgroundColor: '#fff1f1', flex: 1 }}>
-            <View style={{flex: 8}}>
-                {this.state.session.Exercices.map( set => 
-                    <PreviewSet success={set.success} restTime={set.restTime} nbrRep={set.nbrRep} muscle={set.muscle} name={ set.key + " : " + set.name } session={this.state.session} exerciceKey={ set.key } saveChanges={(session) => this.saveChanges(session)} delete={() => this.deleteSet(set.key) }/>
-                    )}
-                </View>
-
-                <View style={{flex: 1, flexDirection: 'row', backgroundColor: '#d32f2f'}}>
-                     <CountDown
+                    <CountDown
+                        style={{marginTop: 5}}
                         size={25}
                         until={5}
                         onFinish={() => Vibration.vibrate(800)} 
@@ -169,11 +155,16 @@ export class SetsList extends React.Component {
                         showSeparator
                      />
 
-                        <Text style={{ flex: 1, fontWeight: 'bold', fontSize: 20, marginTop : 20 , color: '#fff1f1'}}> Why U miring me, brah ?</Text>
+                    </View>
+                    <TouchableOpacity style={{backgroundColor: 'red', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(true, this.state.selectedSet)}>
+                        <Image style={{ height: 50, width: 50 }} source={Images.getImage('check_ico')} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ backgroundColor: 'blue', flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={() => this.setDone(false, this.state.selectedSet)}> 
+                        <Image style={{ height: 50, width: 50,  }} source={Images.getImage('uncheck_ico')} />
+                    </TouchableOpacity>
                 </View>
-
             </View>
-        </View>
+
         )
     }
 

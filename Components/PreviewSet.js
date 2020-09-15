@@ -30,6 +30,7 @@ export class PreviewSession extends React.Component {
             session: this.props.session, 
             exerciceKey: this.props.exerciceKey, 
         }
+        console.log("parent = " + this.props.parent)
     }
 
     SetDone = (value) => {
