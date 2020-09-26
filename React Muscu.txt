@@ -1,0 +1,6 @@
+component:
+	screen:
+		-SessionsList => page d'acceuil qui te permet de créer un exo et permet d'acceder au graph,
+		-SetsList,
+		-CreateSet,
+		-StatsExo
