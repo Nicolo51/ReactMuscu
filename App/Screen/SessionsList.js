@@ -12,11 +12,11 @@ import {
 } from 'react-native';
 import DialogInput from 'react-native-dialog-input';
 
-import PreviewSession from './PreviewSession.js';
-import CustomButton from './CustomButton.js';
+import PreviewSession from '../Components/PreviewSession.js';
+import CustomButton from '../Components/CustomButton.js';
 import SetsList from './SetsList.js';
-import Header from './Header.js';
-import StyleElements from './StyleElements.js';
+import Header from '../Components/Header.js';
+import StyleElements from '../Components/StyleElements.js';
 
 const WIDTH = Dimensions.get('window').width - 40;
 const HEADER_HEIGHT = 50;

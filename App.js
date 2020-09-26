@@ -7,12 +7,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 import SessionsList from './Components/SessionsList.js';
 import SetsList from './Components/SetsList.js';
 import StatsExo from './Components/StatsExo.js';
+import ExoNote from './Components/ExoNote.js';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {CreateSet} from './Components/CreateSet.js';
 
 navigateToScreen = (app, screen, option) => {
-  console.log(option);
   app.props.navigation.navigate(screen, option);
 };
 
@@ -33,6 +33,7 @@ Load = async name => {
   } catch (error) {
     console.log('Something went wrong : ' + error);
   }
+<<<<<<< HEAD
 };
 
 const AppNavigator = createStackNavigator(
@@ -43,6 +44,17 @@ const AppNavigator = createStackNavigator(
     CreateSet: {screen: CreateSet},
     StatsExo: {screen: StatsExo},
   },
+=======
+}
+
+const AppNavigator = createStackNavigator({ //declare all the screen possible of the stack navigator 
+  SessionsList: { screen: SessionsList }, // <Name to call>: { screen: <imported Component from above> } 
+  SetsList: { screen: SetsList }, 
+  CreateSet : { screen: CreateSet }, 
+  StatsExo: { screen: StatsExo},
+  ExoNote: { screen: ExoNote},
+},
+>>>>>>> f11760d3e0ef8b5d9e115b6b75cf09528dfaf599
   {
     initialRouteName: 'SessionsList', // What screen the app start at
   },

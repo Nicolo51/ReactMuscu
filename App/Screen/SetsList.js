@@ -8,10 +8,10 @@ import {
   StyleSheet,
   Vibration,
 } from 'react-native';
-import PreviewSet from './PreviewSet';
-import Header from './Header.js';
-import StyleElements from './StyleElements.js';
-import CustomButton from './CustomButton.js';
+import PreviewSet from '../Components/PreviewSet';
+import Header from '../Components/Header.js';
+import StyleElements from '../Components/StyleElements.js';
+import CustomButton from '../Components/CustomButton.js';
 import {ScrollView} from 'react-native-gesture-handler';
 import Images from '../../index.js';
 import DialogInput from 'react-native-dialog-input';
