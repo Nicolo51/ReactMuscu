@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import images from '../..';
 const HEADER_HEIGHT = 40;
-import Images from '../index/';
+import Images from '../../index.js';
 
 export class PreviewSet extends React.Component {
   render() {

@@ -4,13 +4,13 @@ import {AsyncStorage} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import SessionsList from './Components/SessionsList.js';
-import SetsList from './Components/SetsList.js';
-import StatsExo from './Components/StatsExo.js';
-import ExoNote from './Components/ExoNote.js';
+import SessionsList from './App/Screen/SessionsList.js';
+import SetsList from './App/Screen/SetsList.js';
+import StatsExo from './App/Screen/StatsExo.js';
+import ExoNote from './App/Screen/ExoNote.js';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {CreateSet} from './Components/CreateSet.js';
+import {CreateSet} from './App/Screen/CreateSet.js';
 
 navigateToScreen = (app, screen, option) => {
   app.props.navigation.navigate(screen, option);
@@ -33,7 +33,6 @@ Load = async name => {
   } catch (error) {
     console.log('Something went wrong : ' + error);
   }
-<<<<<<< HEAD
 };
 
 const AppNavigator = createStackNavigator(
@@ -43,18 +42,8 @@ const AppNavigator = createStackNavigator(
     SetsList: {screen: SetsList},
     CreateSet: {screen: CreateSet},
     StatsExo: {screen: StatsExo},
+    ExoNote: {screen: ExoNote},
   },
-=======
-}
-
-const AppNavigator = createStackNavigator({ //declare all the screen possible of the stack navigator 
-  SessionsList: { screen: SessionsList }, // <Name to call>: { screen: <imported Component from above> } 
-  SetsList: { screen: SetsList }, 
-  CreateSet : { screen: CreateSet }, 
-  StatsExo: { screen: StatsExo},
-  ExoNote: { screen: ExoNote},
-},
->>>>>>> f11760d3e0ef8b5d9e115b6b75cf09528dfaf599
   {
     initialRouteName: 'SessionsList', // What screen the app start at
   },

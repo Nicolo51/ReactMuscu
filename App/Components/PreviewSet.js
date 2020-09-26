@@ -13,9 +13,9 @@ import SetSuccess from './SetSuccess';
 import CustomButton from './CustomButton';
 import StyleElements from './StyleElements';
 const HEADER_HEIGHT = 40;
-import Images from '../index/';
+import Images from '../../index.js';
 import CountDown from 'react-native-countdown-component';
-import ExoNote from './ExoNote.js';
+import ExoNote from '../Screen/ExoNote.js';
 
 //name = name display on top of the preview
 //delete = called function when cross is pressed

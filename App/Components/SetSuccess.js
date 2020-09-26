@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Image, Text} from 'react-native';
-import Images from '../index/';
+import Images from '../../index/';
 
 //isChecked = true: Green check | false : red cross | null : empty ico
 
