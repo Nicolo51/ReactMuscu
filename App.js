@@ -12,6 +12,8 @@ import ExoNote from './App/Screen/ExoNote.js';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {CreateSet} from './App/Screen/CreateSet.js';
 
+import TabNavigator from './App/Navigation/TabNavigator.js';
+
 navigateToScreen = (app, screen, option) => {
   app.props.navigation.navigate(screen, option);
 };
@@ -35,21 +37,26 @@ Load = async name => {
   }
 };
 
-const AppNavigator = createStackNavigator(
-  {
-    //declare all the screen possible of the stack navigator
-    SessionsList: {screen: SessionsList}, // <Name to call>: { screen: <imported Component from above> }
-    SetsList: {screen: SetsList},
-    CreateSet: {screen: CreateSet},
-    StatsExo: {screen: StatsExo},
-    ExoNote: {screen: ExoNote},
-  },
-  {
-    initialRouteName: 'SessionsList', // What screen the app start at
-  },
-);
+export default class App extends React.Component {
+  render() {
+    return <TabNavigator />;
+  }
+}
+// const AppNavigator = createStackNavigator(
+//   {
+//     //declare all the screen possible of the stack navigator
+//     SessionsList: {screen: SessionsList}, // <Name to call>: { screen: <imported Component from above> }
+//     SetsList: {screen: SetsList},
+//     CreateSet: {screen: CreateSet},
+//     StatsExo: {screen: StatsExo},
+//     ExoNote: {screen: ExoNote},
+//   },
+//   {
+//     initialRouteName: 'SessionsList', // What screen the app start at
+//   },
+// );
 
-export default createAppContainer(AppNavigator); // create the stack navigator
+// export default createAppContainer(AppNavigator); // create the stack navigator
 
 /*
 [
