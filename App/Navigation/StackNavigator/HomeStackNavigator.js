@@ -3,12 +3,12 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import SessionsList from '../Screen/SessionsList.js';
-import SetsList from '../Screen/SetsList.js';
-import StatsExo from '../Screen/StatsExo.js';
-import ExoNote from '../Screen/ExoNote.js';
+import SessionsList from '../../Screen/SessionsList.js';
+import SetsList from '../../Screen/SetsList.js';
+import StatsExo from '../../Screen/StatsExo.js';
+import ExoNote from '../../Screen/ExoNote.js';
 
-class StackNaviguator extends React.Component {
+class HomeStackNaviguator extends React.Component {
   render() {
     const SessionListStack = createStackNavigator();
     return (
@@ -32,4 +32,4 @@ class StackNaviguator extends React.Component {
   //   }
 }
 
-export default StackNaviguator;
+export default HomeStackNaviguator;

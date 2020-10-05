@@ -6,7 +6,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import StackNavigator from './StackNavigator.js';
+import HomeStackNavigator from './StackNavigator/HomeStackNavigator.js';
+import ProfileStackNavigator from './StackNavigator/ProfileStackNavigator.js';
+import GraphStackNavigator from './StackNavigator/GraphStackNavigator.js';
+import AddTrainStackNavigator from './StackNavigator/AddTrainStackNavigator.js';
 
 class TabNaviguator extends React.Component {
   render() {
@@ -35,11 +38,15 @@ class TabNaviguator extends React.Component {
           tabBarOptions={{
             activeTintColor: 'orange',
             inactiveTintColor: 'black',
+            showLabel: false,
           }}>
-          <Tab.Screen name="Home" component={StackNavigator} />
-          <Tab.Screen name="Graph" component={StackNavigator} />
-          <Tab.Screen name="Add" component={StackNavigator} />
-          <Tab.Screen name="Profile" component={StackNavigator} />
+          <Tab.Screen name="Home" component={HomeStackNavigator} />
+          <Tab.Screen name="Graph" component={GraphStackNavigator} />
+          <Tab.Screen
+            name="Add"
+            component={/*AddTrainStackNavigator*/ HomeStackNavigator}
+          />
+          <Tab.Screen name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>
       </NavigationContainer>
     );
