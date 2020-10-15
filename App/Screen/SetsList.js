@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  AsyncStorage,
   StyleSheet,
   Vibration,
 } from 'react-native';
@@ -16,6 +15,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import Images from '../../index.js';
 import DialogInput from 'react-native-dialog-input';
 import CountDown from 'react-native-countdown-component';
+import AsyncStorage from '@react-native-community/async-storage'
 
 export class SetsList extends React.Component {
   constructor(props) {
@@ -23,8 +23,8 @@ export class SetsList extends React.Component {
     self = this;
     this.state = {
       isFailVisible: false,
-      session: this.props.navigation.state.params.session,
-      TrainingSessions: this.props.navigation.state.params.TrainingSessions,
+      session: this.props.route.params.session,
+      TrainingSessions: this.props.route.params.TrainingSessions,
       selectedSet: 0,
     };
   }
@@ -148,6 +148,7 @@ export class SetsList extends React.Component {
   };
 
   render() {
+    console.log('render', this.props.route);
     return (
       <View style={{flex: 1}}>
         <DialogInput

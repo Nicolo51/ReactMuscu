@@ -13,7 +13,11 @@ class HomeStackNaviguator extends React.Component {
     const SessionListStack = createStackNavigator();
     return (
       <SessionListStack.Navigator>
-        <SessionListStack.Screen name="SessionsList" component={SessionsList} />
+        <SessionListStack.Screen
+          name="SessionsList"
+          component={SessionsList}
+          options={{headerShown: false}}
+        />
       </SessionListStack.Navigator>
     );
   }

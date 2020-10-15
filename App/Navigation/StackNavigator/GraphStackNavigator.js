@@ -12,7 +12,11 @@ class GraphStackNaviguator extends React.Component {
     const SessionListStack = createStackNavigator();
     return (
       <SessionListStack.Navigator>
-        <SessionListStack.Screen name="StatsExo" component={StatsExo} />
+        <SessionListStack.Screen
+          name="StatsExo"
+          component={StatsExo}
+          options={{headerShown: false}}
+        />
       </SessionListStack.Navigator>
     );
   }

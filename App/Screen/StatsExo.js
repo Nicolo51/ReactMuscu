@@ -1,6 +1,7 @@
 import React from 'react';
 import {LineChart, YAxis, Grid} from 'react-native-svg-charts';
 import {View, Text} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage'
 
 import Header from '../Components/Header.js';
 import StyleElements from '../Components/StyleElements.js';

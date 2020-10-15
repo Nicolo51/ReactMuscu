@@ -1,22 +1,19 @@
 import React from 'react';
 import {
-  View,
-  ScrollView,
-  Text,
   Dimensions,
-  AsyncStorage,
-  Image,
-  TouchableOpacity,
   Alert,
-  ImageBackground,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
 } from 'react-native';
 import DialogInput from 'react-native-dialog-input';
+import AsyncStorage from '@react-native-community/async-storage'
 
 import PreviewSession from '../Components/PreviewSession.js';
 import CustomButton from '../Components/CustomButton.js';
-import SetsList from './SetsList.js';
 import Header from '../Components/Header.js';
 import StyleElements from '../Components/StyleElements.js';
+import {Button} from 'react-native';
 
 const WIDTH = Dimensions.get('window').width - 40;
 const HEADER_HEIGHT = 50;
@@ -27,11 +24,12 @@ export class SessionsList extends React.Component {
     super(props);
     self = this;
     this.state = {
-      TrainingSessions: [],
+      TrainingSessions: {},
       IsAddSessionVisible: false,
       loaded: false,
     };
   }
+
   static navigationOptions = {
     title: 'Training Screen',
     headerStyle: {
@@ -50,11 +48,30 @@ export class SessionsList extends React.Component {
 
   async componentDidMount() {
     if (this.state.loaded === true) return;
-    let TrainingSessions = await Load('TrainingSessions');
-    if (TrainingSessions == undefined) {
-      return;
+    // let TrainingSessions = await AsyncStorage.getItem('TrainingSessions');
+    await this.load().then(ans => {
+      if (ans === null) {
+        this.setState({
+          TrainingSessions: [{key: 0, name: 'tete', Exercices: []}],
+        });
+      } else if (ans === undefined) {
+        return;
+      } else {
+        this.setState({TrainingSessions: JSON.parse(ans)});
+      }
+    });
+
+    this.setState({/*TrainingSessions: TrainingSessions,*/ loaded: true});
+  }
+
+  async load() {
+    try {
+      console.log('start load');
+      let key = await AsyncStorage.getItem('TrainingSessions');
+      return key;
+    } catch (e) {
+      console.log(e);
     }
-    this.setState({TrainingSessions: TrainingSessions, loaded: true});
   }
 
   addSession = () => {
@@ -103,9 +120,11 @@ export class SessionsList extends React.Component {
     }
   };
 
-  render() {
+    render() {
+    // AsyncStorage.clear();
+    console.log(this.state.TrainingSessions);
     return (
-      <ScrollView style={{backgroundColor: '#fff1f1'}}>
+      <SafeAreaView style={styles.container}>
         <DialogInput
           isDialogVisible={this.state.IsAddSessionVisible}
           title={'Ajouter un entraînement'}
@@ -118,38 +137,65 @@ export class SessionsList extends React.Component {
             this.setState({IsAddSessionVisible: false});
           }}
         />
-
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            paddingTop: 10,
-          }}>
-          {this.state.TrainingSessions.map(session => (
+        <FlatList
+          data={this.state.TrainingSessions}
+          keyExtractor={item => item.key}
+          inverted={true}
+          refreshing={! this.state.loaded}
+          onRefresh={() => {
+            this.setState({loaded: false}),
+            this.load().then(ans => {
+              this.setState({TrainingSessions: JSON.parse(ans)})
+            })
+            this.setState({loaded: true}) 
+          }}
+          renderItem={({item}) => (
             <PreviewSession
-              name={session.key + ' : ' + session.name}
+              name={item.key + ' : ' + item.name}
               width={WIDTH / 2}
               onPress={() =>
-                navigateToScreen(this, 'SetsList', {
-                  TrainingSessions: this.state.TrainingSessions,
-                  session: {
-                    key: session.key,
-                    name: session.name,
-                    Exercices: session.Exercices,
+                this.props.navigation.navigate('Add', {
+                  screen: 'SetsList',
+                  params: {
+                    TrainingSessions: item, //this.state.TrainingSessions,
+                    session: {
+                      key: item.key, //this.state.TrainingSessions.key,
+                      name: item.name, //this.state.TrainingSessions.name,
+                      Exercices: item.Exercices, // this.state.TrainingSessions.Exercices,
+                    },
                   },
                 })
               }
-              delete={() => this.deleteSession(session.key)}
+              delete={() => this.deleteSession(item.key)}
             />
-          ))}
-        </View>
-        <CustomButton
-          onPress={() => navigateToScreen(this, 'StatsExo', null)}
+          )}
+          numColumns={2}
         />
-      </ScrollView>
+          <CustomButton
+            onPress={() => navigateToScreen(this, 'StatsExo', null)}
+          />
+      </SafeAreaView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff1f1',
+    flex: 1,
+    // flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingTop: 10,
+  },
+  view:{
+    flexDirection:'row',
+  }
+  // view: {
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   flexWrap: 'wrap',
+  //   paddingTop: 10,
+  // },
+});
 
 export default SessionsList;

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  AsyncStorage,
   TouchableOpacity,
   StyleSheet,
   View,
@@ -14,6 +13,7 @@ import Header from '../Components/Header.js';
 import Images from '../../index.js';
 import StyleElements from '../Components/StyleElements.js';
 import CustomButton from '../Components/CustomButton.js';
+import AsyncStorage from '@react-native-community/async-storage'
 
 export class ExoNote extends React.Component {
   constructor(props) {

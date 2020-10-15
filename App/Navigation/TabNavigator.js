@@ -42,10 +42,7 @@ class TabNaviguator extends React.Component {
           }}>
           <Tab.Screen name="Home" component={HomeStackNavigator} />
           <Tab.Screen name="Graph" component={GraphStackNavigator} />
-          <Tab.Screen
-            name="Add"
-            component={/*AddTrainStackNavigator*/ HomeStackNavigator}
-          />
+          <Tab.Screen name="Add" component={AddTrainStackNavigator} />
           <Tab.Screen name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>
       </NavigationContainer>
